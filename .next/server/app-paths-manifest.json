@@ -1,3 +1,25 @@
 {
-  "/[locale]/page": "app/[locale]/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/cron/keepalive/route": "app/api/cron/keepalive/route.js",
+  "/api/contact/route": "app/api/contact/route.js",
+  "/api/memberships/register/route": "app/api/memberships/register/route.js",
+  "/api/payments/verify/route": "app/api/payments/verify/route.js",
+  "/api/payments/create-order/route": "app/api/payments/create-order/route.js",
+  "/api/payments/webhook/route": "app/api/payments/webhook/route.js",
+  "/page": "app/page.js",
+  "/api/volunteers/register/route": "app/api/volunteers/register/route.js",
+  "/[locale]/about/page": "app/[locale]/about/page.js",
+  "/[locale]/admin/page": "app/[locale]/admin/page.js",
+  "/[locale]/donate/page": "app/[locale]/donate/page.js",
+  "/[locale]/contact/page": "app/[locale]/contact/page.js",
+  "/[locale]/dashboard/page": "app/[locale]/dashboard/page.js",
+  "/[locale]/events/page": "app/[locale]/events/page.js",
+  "/[locale]/page": "app/[locale]/page.js",
+  "/[locale]/membership/page": "app/[locale]/membership/page.js",
+  "/[locale]/verify/[public_member_id]/page": "app/[locale]/verify/[public_member_id]/page.js",
+  "/[locale]/programs/page": "app/[locale]/programs/page.js",
+  "/[locale]/volunteer/page": "app/[locale]/volunteer/page.js",
+  "/[locale]/stories/page": "app/[locale]/stories/page.js",
+  "/[locale]/signup/page": "app/[locale]/signup/page.js",
+  "/[locale]/login/page": "app/[locale]/login/page.js"
 }

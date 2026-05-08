@@ -191,5 +191,40 @@
     "validUntil": "Valid Until",
     "verified": "Verified",
     "notFound": "ID not found or invalid"
+  },
+  "Login": {
+    "title": "Sign In to Your Account",
+    "email": "Email Address",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "signIn": "Sign In",
+    "signingIn": "Signing In...",
+    "sendMagicLink": "Send Magic Link",
+    "sending": "Sending...",
+    "magicLinkSent": "Magic link sent! Check your email.",
+    "noAccount": "Don't have an account?",
+    "contactAdmin": "Contact admin",
+    "errors": {
+      "unexpected": "An unexpected error occurred. Please try again."
+    }
+  },
+  "Signup": {
+    "title": "Create Your Account",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "signUp": "Sign Up",
+    "signingUp": "Signing Up...",
+    "checkEmail": "Check your email for verification link!",
+    "backToLogin": "Back to Login",
+    "hasAccount": "Already have an account?",
+    "loginHere": "Login here",
+    "errors": {
+      "passwordMismatch": "Passwords do not match.",
+      "passwordLength": "Password must be at least 6 characters.",
+      "unexpected": "An unexpected error occurred. Please try again."
+    }
   }
 }
