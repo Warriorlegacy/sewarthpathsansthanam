@@ -25,3 +25,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Next.js build cache (large files)
+.next/cache
+.next/server
+.next/static
