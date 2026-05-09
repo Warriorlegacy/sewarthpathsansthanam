@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { createServiceClient } from "@/lib/supabase/server";
+import { generate80GReceiptPdf, sendReceiptEmail } from "@/lib/receipts";
 
 export async function POST(req: NextRequest) {
   try {
@@ -37,6 +38,13 @@ export async function POST(req: NextRequest) {
       const orderId = event.payload.payment?.entity.order_id;
 
       if (paymentId && orderId) {
+        // Fetch donation to send receipt
+        const { data: donations } = await supabase
+          .from("donations")
+          .select("*, profiles(full_name, email)")
+          .eq("razorpay_order_id", orderId)
+          .eq("status", "pending");
+
         await Promise.all([
           supabase
             .from("donations")
@@ -49,6 +57,28 @@ export async function POST(req: NextRequest) {
             .eq("razorpay_order_id", orderId)
             .eq("status", "pending"),
         ]);
+
+        // Send Email Receipt for Donations
+        if (donations && donations.length > 0) {
+          const donation = donations[0];
+          // Use profile email/name or fallback to raw payload if available
+          const profile = donation.profiles as { full_name?: string; email?: string } | null;
+          const donorName = profile?.full_name || "Generous Donor";
+          const donorEmail = profile?.email;
+
+          if (donorEmail) {
+            const receiptNo = `SPS-80G-${donation.id.slice(0, 8).toUpperCase()}`;
+            const pdfBytes = await generate80GReceiptPdf({
+              receiptNo,
+              donorName,
+              donorPan: donation.pan_number || "",
+              amount: donation.amount,
+              date: new Date().toLocaleDateString("en-IN"),
+              purpose: donation.purpose || "General Fund",
+            });
+            await sendReceiptEmail(donorEmail, donorName, pdfBytes, receiptNo);
+          }
+        }
       }
     }
 

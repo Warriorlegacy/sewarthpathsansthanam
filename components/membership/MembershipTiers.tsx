@@ -104,13 +104,18 @@ export default function MembershipTiers() {
         order_id: data.orderId,
         prefill: { name: form.name, email: form.email, contact: form.phone },
         theme: { color: selectedTier?.color || "#E07B39" },
-        handler: async (response: object) => {
-          await fetch("/api/payments/verify", {
+        handler: async (response: {
+          razorpay_payment_id: string;
+          razorpay_order_id: string;
+          razorpay_signature: string;
+        }) => {
+          const verifyRes = await fetch("/api/payments/verify", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ ...response, membershipId: data.membershipId }),
           });
-          setSuccess(true);
+          if (verifyRes.ok) setSuccess(true);
+          else setError("Payment verification failed. Contact support.");
         },
       };
       if (typeof win.Razorpay !== "undefined") {

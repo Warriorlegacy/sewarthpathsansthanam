@@ -19,12 +19,13 @@ import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import Link from "next/link";
 
-export default async function DashboardPage({ params }: { params: { locale: string } }) {
+export default async function DashboardPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect(`/${params.locale}/login`);
+    redirect(`/${locale}/login`);
   }
 
   const serviceClient = await createServiceClient();
@@ -65,7 +66,7 @@ export default async function DashboardPage({ params }: { params: { locale: stri
               </Avatar>
               <Box>
                 <Typography variant="h4" fontWeight={700}>
-                  {params.locale === "hi" ? "नमस्ते" : "Welcome"},{" "}
+                  {locale === "hi" ? "नमस्ते" : "Welcome"},{" "}
                   {profile?.full_name ?? user.email?.split("@")[0]}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">{user.email}</Typography>
@@ -131,7 +132,7 @@ export default async function DashboardPage({ params }: { params: { locale: stri
                         </Typography>
                         <Button
                           component={Link}
-                          href={`/${params.locale}/verify/${activeMembership.public_member_id}`}
+                          href={`/${locale}/verify/${activeMembership.public_member_id}`}
                           size="small"
                           variant="text"
                           sx={{ p: 0, fontSize: "0.72rem", color: planColors[activeMembership.plan_code] }}

@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { createServiceClient } from "@/lib/supabase/server";
 import Navbar from "@/components/layout/Navbar";
+import VolunteerActions from "./VolunteerActions";
+import MembershipActions from "./MembershipActions";
 import {
   Box,
   Container,
@@ -21,16 +23,17 @@ import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import MailIcon from "@mui/icons-material/Mail";
 
-export default async function AdminPage({ params }: { params: { locale: string } }) {
+export default async function AdminPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user) redirect(`/${params.locale}/login`);
+  if (!user) redirect(`/${locale}/login`);
 
   const serviceClient = await createServiceClient();
   const { data: profile } = await serviceClient.from("profiles").select("role").eq("id", user.id).maybeSingle();
 
-  if (profile?.role !== "admin") redirect(`/${params.locale}/dashboard`);
+  if (profile?.role !== "admin") redirect(`/${locale}/dashboard`);
 
   const [
     { count: volunteerCount },
@@ -106,8 +109,11 @@ export default async function AdminPage({ params }: { params: { locale: string }
                         <Typography variant="body2" fontWeight={600}>{v.full_name}</Typography>
                         <Typography variant="caption" color="text.secondary">{v.phone} · {v.city}</Typography>
                       </Box>
-                      <Chip label={v.status} size="small"
-                        sx={{ bgcolor: v.status === "approved" ? "#2D6A4F20" : "#E07B3920", color: v.status === "approved" ? "#2D6A4F" : "#E07B39", fontWeight: 600 }} />
+                      <Stack direction="row" spacing={2} alignItems="center">
+                        <VolunteerActions id={v.id} status={v.status} />
+                        <Chip label={v.status} size="small"
+                          sx={{ bgcolor: v.status === "approved" ? "#2D6A4F20" : "#E07B3920", color: v.status === "approved" ? "#2D6A4F" : "#E07B39", fontWeight: 600 }} />
+                      </Stack>
                     </Stack>
                   ))}
                   {!recentVolunteers?.length && (
@@ -131,8 +137,11 @@ export default async function AdminPage({ params }: { params: { locale: string }
                           <Typography variant="body2" fontWeight={600}>{p?.full_name ?? "—"}</Typography>
                           <Typography variant="caption" color="text.secondary">{m.plan_code} · {m.public_member_id}</Typography>
                         </Box>
-                        <Chip label={m.status} size="small"
-                          sx={{ bgcolor: m.status === "active" ? "#2D6A4F20" : "#E07B3920", color: m.status === "active" ? "#2D6A4F" : "#E07B39", fontWeight: 600 }} />
+                        <Stack direction="row" spacing={2} alignItems="center">
+                          <MembershipActions id={m.id} status={m.status} />
+                          <Chip label={m.status} size="small"
+                            sx={{ bgcolor: m.status === "active" ? "#2D6A4F20" : "#E07B3920", color: m.status === "active" ? "#2D6A4F" : "#E07B39", fontWeight: 600 }} />
+                        </Stack>
                       </Stack>
                     );
                   })}

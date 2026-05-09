@@ -1,5 +1,5 @@
 import createMiddleware from "next-intl/middleware";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
 const intlMiddleware = createMiddleware({
@@ -9,14 +9,11 @@ const intlMiddleware = createMiddleware({
 });
 
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  // First, get the localized response from next-intl
+  const response = intlMiddleware(request);
 
-  // Handle Supabase auth session for dashboard/admin routes
-  if (pathname.includes("/dashboard") || pathname.includes("/admin")) {
-    return await updateSession(request);
-  }
-
-  return intlMiddleware(request);
+  // Then, pass it to Supabase for session management
+  return await updateSession(request, response);
 }
 
 export const config = {
