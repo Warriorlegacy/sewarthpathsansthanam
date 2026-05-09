@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
 import { groq } from "@/lib/groq";
+import { generateVolunteerId } from "@/lib/utils/memberId";
 
 export async function POST(req: NextRequest) {
   try {
@@ -38,20 +39,32 @@ Message: ${message}`;
       // Continue without tags
     }
 
-    await supabase.from("volunteer_applications").insert({
-      full_name: name,
-      email: email || null,
-      phone,
-      city: city || null,
-      state: state || null,
-      age_group: ageGroup || null,
-      availability: availability || null,
-      interests: interests || [],
-      how_heard: howHeard || null,
-      message: message || null,
-      status: "pending",
-      tags: aiTags,
-    });
+    const { data: insertedVolunteer } = await supabase
+      .from("volunteer_applications")
+      .insert({
+        full_name: name,
+        email: email || null,
+        phone,
+        city: city || null,
+        state: state || null,
+        age_group: ageGroup || null,
+        availability: availability || null,
+        interests: interests || [],
+        how_heard: howHeard || null,
+        message: message || null,
+        status: "pending",
+        tags: aiTags,
+      })
+      .select("id")
+      .single();
+
+    if (insertedVolunteer?.id) {
+      const volunteerId = await generateVolunteerId(supabase);
+      await supabase
+        .from("volunteer_applications")
+        .update({ volunteer_id: volunteerId })
+        .eq("id", insertedVolunteer.id);
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

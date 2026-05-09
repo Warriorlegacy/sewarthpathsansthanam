@@ -3,6 +3,7 @@ import Razorpay from "razorpay";
 import { createServiceClient } from "@/lib/supabase/server";
 import { randomUUID } from "crypto";
 import { sendWelcomeEmail } from "@/lib/resend";
+import { generateMemberId } from "@/lib/utils/memberId";
 
 export async function POST(req: NextRequest) {
   try {
@@ -26,7 +27,7 @@ export async function POST(req: NextRequest) {
       .single();
 
     const profileId = profile?.id;
-    const publicMemberId = `SPS-${Date.now().toString(36).toUpperCase()}`;
+    const publicMemberId = await generateMemberId(supabase);
 
     let expiresAt: string | null = null;
     if (planCode === "ANNUAL_365") {
