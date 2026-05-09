@@ -1,11 +1,20 @@
 import { Groq } from 'groq-sdk';
 import { NextResponse } from 'next/server';
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
-
 export async function POST(req: Request) {
+  const apiKey = process.env.GROQ_API_KEY;
+
+  if (!apiKey) {
+    return NextResponse.json(
+      { error: "AI Configuration Missing: GROQ_API_KEY not found in environment" },
+      { status: 500 }
+    );
+  }
+
+  const groq = new Groq({
+    apiKey: apiKey,
+  });
+
   try {
     const { messages } = await req.json();
 
@@ -23,12 +32,15 @@ Knowledge Base:
 
     const completion = await groq.chat.completions.create({
       messages: [systemPrompt, ...messages],
-      model: 'llama3-8b-8192',
+      model: 'llama3-70b-8192',
     });
 
     return NextResponse.json({ response: completion.choices[0].message.content });
   } catch (error: any) {
     console.error('Groq API Error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || 'Internal Server Error' },
+      { status: 500 }
+    );
   }
 }
