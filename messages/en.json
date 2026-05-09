@@ -208,7 +208,7 @@
       "unexpected": "An unexpected error occurred. Please try again."
     }
   },
-  "Signup": {
+   "Signup": {
     "title": "Create Your Account",
     "name": "Full Name",
     "email": "Email Address",
@@ -226,5 +226,69 @@
       "passwordLength": "Password must be at least 6 characters.",
       "unexpected": "An unexpected error occurred. Please try again."
     }
+  },
+  "resources": {
+    "title": "Resources",
+    "subtitle": "Important documents and downloadable forms",
+    "note": "All documents are verified and authentic. Some certificates will be uploaded after government processing.",
+    "tabs": {
+      "documents": "📄 Registration Documents",
+      "forms": "📝 Downloadable Forms"
+    },
+    "documents": {
+      "trustDeed": {
+        "title": "सेवार्थ पथ संस्थानम् Trust Deed",
+        "desc": "Original trust deed registration document",
+        "size": "2.4 MB"
+      },
+      "registrationCertificate": {
+        "title": "Section 12A & 80G Certification",
+        "desc": "Income tax exemption certificates",
+        "size": "1.8 MB"
+      },
+      "panCard": {
+        "title": "NGO PAN Card",
+        "desc": "PAN card (redacted for security)",
+        "size": "0.5 MB"
+      },
+      "ngoDarpan": {
+        "title": "NGO Darpan Registration",
+        "desc": "NGO Darpan portal certification",
+        "size": "1.2 MB"
+      },
+      "annualReport": {
+        "title": "Annual Report 2024-25",
+        "desc": "Annual activity and financial report",
+        "size": "3.7 MB"
+      },
+      "bankPassbook": {
+        "title": "Bank Account Details",
+        "desc": "First page of bank passbook for verification",
+        "size": "0.8 MB"
+      }
+    },
+    "forms": {
+      "membershipForm": {
+        "title": "Membership Form (सदस्यता प्रपत्र)",
+        "desc": "Application form for becoming a member",
+        "size": "0.6 MB"
+      },
+      "volunteerForm": {
+        "title": "Volunteer Form (स्वयंसेवक आवेदन)",
+        "desc": "Application form for volunteering",
+        "size": "0.5 MB"
+      },
+      "idCardTemplate": {
+        "title": "ID Card Template (Template only)",
+        "desc": "Editable template for member ID cards",
+        "size": "0.3 MB"
+      },
+      "certificateTemplate": {
+        "title": "Certificate Template",
+        "desc": "Template for certificates of appreciation",
+        "size": "0.4 MB"
+      }
+    },
+    "comingSoon": "Document will be available soon"
   }
 }
