@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
 
 export async function GET() {
+  console.log("Keep-alive cron job triggered");
   try {
     const supabase = await createServiceClient();
     await supabase.from("contact_messages").select("id").limit(1);

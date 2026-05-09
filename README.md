@@ -127,6 +127,14 @@ The site will be available at `https://sewarthpathsansthanam.org` once DNS is co
 | Supporter Member (सहयोगी सदस्य) | ₹1,001 | 1 year | All above + recognition |
 | Lifetime Member (आजीवन सदस्य) | ₹5,001 | Lifetime | All benefits forever |
 
+## Maintenance
+
+### Keep-Alive Cron Job
+To prevent the Supabase project or other free-tier services from entering sleep mode, a keep-alive cron job is configured.
+- `vercel.json` is configured to hit `/api/cron/keepalive` daily.
+- Check the "Cron" tab in the Vercel dashboard to ensure it's active.
+- Use [cron-job.org](https://cron-job.org) as a backup if Vercel cron is not triggering.
+
 ## License
 
 This project is proprietary - Sewarth Path Sansthanam NGO.
