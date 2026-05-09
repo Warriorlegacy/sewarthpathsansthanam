@@ -63,16 +63,20 @@ export default function Navbar() {
           {/* Logo */}
             <Link href={`/${locale}`} style={{ textDecoration: "none", color: "inherit" }}>
               <Stack direction="row" alignItems="center" spacing={1.5}>
-                <Box
-                  sx={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: "50%",
-                    overflow: "hidden",
-                    flexShrink: 0,
-                    border: "1px solid rgba(0,0,0,0.05)",
-                  }}
-                >
+                 <Box
+                   sx={{
+                     width: 40,
+                     height: 40,
+                     borderRadius: "50%",
+                     overflow: "hidden",
+                     flexShrink: 0,
+                     border: "1px solid rgba(0,0,0,0.05)",
+                     transition: "transform 0.3s ease-in-out",
+                     "&:hover": {
+                       transform: "scale(1.1) rotate(5deg)",
+                     },
+                   }}
+                 >
                   <img src="/images/logo.png" alt="Logo" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 </Box>
                 <Box>
