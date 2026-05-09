@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volunteer Application Form - Sewarth Path Sansthanam</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;600;700&display=swap');
+
+    :root {
+      --saffron: #E07B39;
+      --green: #2D6A4F;
+      --cream: #FFFBF5;
+      --dark: #1a1a1a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 2px solid var(--green);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 3px double var(--saffron);
+    }
+
+    .logo-placeholder {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1rem;
+      border: 2px dashed var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: var(--green);
+      background: rgba(45, 106, 79, 0.05);
+    }
+
+    h1 {
+      color: var(--saffron);
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    h2 {
+      color: var(--green);
+      font-size: 1.25rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .bilingual {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      color: #555;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-section {
+      margin-bottom: 2rem;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      flex: 1;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    .underline {
+      border: none;
+      border-bottom: 2px solid var(--green);
+      background: transparent;
+      width: 100%;
+      padding: 0.5rem 0;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--dark);
+    }
+
+    .underline:focus {
+      outline: none;
+      border-bottom-color: var(--saffron);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+    }
+
+    .checkbox-group input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--green);
+    }
+
+    .availability-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    .availability-table th,
+    .availability-table td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: center;
+    }
+
+    .availability-table th {
+      background: rgba(45, 106, 79, 0.1);
+      color: var(--green);
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .skill-tag {
+      background: rgba(224, 123, 57, 0.1);
+      color: var(--saffron);
+      padding: 0.25rem 0.75rem;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      border: 1px solid var(--saffron);
+    }
+
+    .declaration {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: rgba(45, 106, 79, 0.05);
+      border-left: 4px solid var(--green);
+      font-style: italic;
+    }
+
+    .signature-section {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
+    }
+
+    .signature-box {
+      text-align: center;
+      width: 45%;
+    }
+
+    .signature-line {
+      border: none;
+      border-bottom: 2px solid var(--dark);
+      width: 100%;
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--dark);
+      font-style: italic;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--green);
+      color: #666;
+      font-size: 0.85rem;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+
+      .container {
+        box-shadow: none;
+        border: none;
+        padding: 1.5rem;
+      }
+
+      .underline {
+        border-bottom: 1.5px solid #000;
+      }
+
+      .logo-placeholder {
+        border: 2px solid var(--green);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo-placeholder">🙏</div>
+      <h1>Volunteer Application Form</h1>
+      <p class="bilingual">स्वयंसेवक आवेदन पत्र</p>
+      <p><strong>Sewarth Path Sansthanam</strong><br/>
+      सेवार्थ पथ संस्थानम्<br/>
+      Reg. No: 202200996052093</p>
+    </div>
+
+    <div class="form-section">
+      <h2>Personal Details / व्यक्तिगत विवरण</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name / पूरा नाम</label>
+          <input type="text" class="underline" placeholder="Enter full name"/>
+        </div>
+        <div class="form-group">
+          <label>Date of Birth / जन्म तिथि</label>
+          <input type="text" class="underline" placeholder="DD/MM/YYYY"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone / फोन</label>
+          <input type="text" class="underline" placeholder="+91"/>
+        </div>
+        <div class="form-group">
+          <label>Email / ईमेल</label>
+          <input type="text" class="underline" placeholder="Email address"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Address / पता</label>
+          <input type="text" class="underline" placeholder="House, Street, Village/City"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>City / शहर</label>
+          <input type="text" class="underline"/>
+        </div>
+        <div class="form-group">
+          <label>District / जिला</label>
+          <input type="text" class="underline"/>
+        </div>
+        <div class="form-group">
+          <label>State / राज्य</label>
+          <input type="text" class="underline"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Education & Skills / शिक्षा & कौशल</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Highest Qualification / उच्चतम योग्यता</label>
+          <input type="text" class="underline" placeholder="e.g., B.A., B.Sc., M.Tech"/>
+        </div>
+        <div class="form-group">
+          <label>Occupation / पेशा</label>
+          <input type="text" class="underline" placeholder="e.g., Teacher, Engineer, Student"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Skills / कौशल (comma-separated)</label>
+        <input type="text" class="underline" placeholder="e.g., Teaching, Coding, Event Management"/>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Areas of Interest / रुचि क्षेत्र</h2>
+      <div class="checkbox-group">
+        <input type="checkbox" id="edu" name="interest"/>
+        <label for="edu">Education & Child Welfare / शिक्षा एवं बाल कल्याण</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="health" name="interest"/>
+        <label for="health">Health & Wellness / स्वास्थ्य एवं कल्याण</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="env" name="interest"/>
+        <label for="env">Environment / पर्यावरण</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="culture" name="interest"/>
+        <label for="culture">Cultural Preservation / सांस्कृतिक संरक्षण</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="events" name="interest"/>
+        <label for="events">Event Support / कार्यक्रम सहायता</label>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Availability / उपलब्धता</h2>
+      <table class="availability-table">
+        <thead>
+          <tr>
+            <th>Day / दिन</th>
+            <th>Morning (6-10 AM)</th>
+            <th>Afternoon (10 AM-2 PM)</th>
+            <th>Evening (4-8 PM)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Monday / सोमवार</td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+          </tr>
+          <tr>
+            <td>Tuesday / मंगलवार</td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+          </tr>
+          <tr>
+            <td>Wednesday / बुधवार</td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+          </tr>
+          <tr>
+            <td>Thursday / गुरुवार</td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+          </tr>
+          <tr>
+            <td>Friday / शुक्रवार</td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+          </tr>
+          <tr>
+            <td>Saturday / शनिवार</td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+          </tr>
+          <tr>
+            <td>Sunday / रविवार</td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+            <td><input type="checkbox"/></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="form-section">
+      <h2>Previous Experience (if any) / पूर्व अनुभव (यदि कोई हOSTORY)</h2>
+      <div class="form-group">
+        <label>Describe your volunteer/work experience / अपने स्वयंसेवक/कार्य अनुभव का वर्णन करें</label>
+        <textarea class="underline" rows="4" style="width: 100%; border: none; border-bottom: 2px solid var(--green); background: transparent; font-family: inherit; font-size: 1rem; resize: none;"></textarea>
+      </div>
+    </div>
+
+    <div class="declaration">
+      I solemnly pledge to serve Sewarth Path Sansthanam with dedication and uphold its values. I understand that volunteering is a commitment to selfless service (seva).<br/><br/>
+      मैं सेवार्थ पथ संस्थानम् की सेवा में समर्पित होने और इसके मूल्यों का पालन करने का गंभीर प्रण लेता/लेती हूँ। मुझे अहिंसा, सत्य, और सेवा के मूल्यों का पालन करने का दायित्व है।
+    </div>
+
+    <div class="signature-section">
+      <div class="signature-box">
+        <input type="text" class="signature-line" placeholder="Applicant Signature"/>
+        <p>Applicant Signature / आवेदक हस्ताक्षर</p>
+      </div>
+      <div class="signature-box">
+        <input type="text" class="signature-line" placeholder="Date"/>
+        <p>Date / तिथि</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Sewarth Path Sansthanam — Service is the Highest Dharma<br/>
+      सेवा परमो धर्म</p>
+      <p>For queries: contact@sewarthpathsansthanam.org | +91 XXXXXXXXXX</p>
+    </div>
+  </div>
+</body>
+</html>

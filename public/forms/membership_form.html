@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Membership Application Form - Sewarth Path Sansthanam</title>
+  <style>
+    /* Import Hindi-friendly font */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;600;700&display=swap');
+
+    :root {
+      --saffron: #E07B39;
+      --green: #2D6A4F;
+      --cream: #FFFBF5;
+      --dark: #1a1a1a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 2px solid var(--saffron);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 3px double var(--green);
+    }
+
+    .logo-placeholder {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1rem;
+      border: 2px dashed var(--saffron);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: var(--saffron);
+      background: rgba(224, 123, 57, 0.05);
+    }
+
+    h1 {
+      color: var(--green);
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    h2 {
+      color: var(--saffron);
+      font-size: 1.25rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .bilingual {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      color: #555;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-section {
+      margin-bottom: 2rem;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      flex: 1;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    .underline {
+      border: none;
+      border-bottom: 2px solid var(--green);
+      background: transparent;
+      width: 100%;
+      padding: 0.5rem 0;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--dark);
+    }
+
+    .underline:focus {
+      outline: none;
+      border-bottom-color: var(--saffron);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+    }
+
+    .checkbox-group input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--green);
+    }
+
+    .declaration {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: rgba(45, 106, 79, 0.05);
+      border-left: 4px solid var(--green);
+      font-style: italic;
+    }
+
+    .signature-section {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
+    }
+
+    .signature-box {
+      text-align: center;
+      width: 45%;
+    }
+
+    .signature-line {
+      border: none;
+      border-bottom: 2px solid var(--dark);
+      width: 100%;
+      margin-top: 2rem;
+      text-align: center;
+      color: var(--dark);
+      font-style: italic;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 2px solid var(--saffron);
+      color: #666;
+      font-size: 0.85rem;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+
+      .container {
+        box-shadow: none;
+        border: none;
+        padding: 1.5rem;
+      }
+
+      .underline {
+        border-bottom: 1.5px solid #000;
+      }
+
+      .logo-placeholder {
+        border: 2px solid var(--saffron);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo-placeholder">🕉️</div>
+      <h1>Membership Application Form</h1>
+      <p class="bilingual">सदस्यता आवेदन पत्र</p>
+      <p><strong>Sewarth Path Sansthanam</strong><br/>
+      सेवार्थ पथ संस्थानम्<br/>
+      Reg. No: 202200996052093</p>
+    </div>
+
+    <div class="form-section">
+      <h2>Personal Information / व्यक्तिगत जानकारी</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name / पूरा नाम</label>
+          <input type="text" class="underline" placeholder="Enter name"/>
+        </div>
+        <div class="form-group">
+          <label>Date of Birth / जन्म तिथि</label>
+          <input type="text" class="underline" placeholder="DD/MM/YYYY"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number / फोन नंबर</label>
+          <input type="text" class="underline" placeholder="+91 XXXXX XXXXX"/>
+        </div>
+        <div class="form-group">
+          <label>Email / ईमेल</label>
+          <input type="email" class="underline" placeholder="example@email.com"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Address / पता</label>
+          <input type="text" class="underline" placeholder="Full residential address"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>City / शहर</label>
+          <input type="text" class="underline"/>
+        </div>
+        <div class="form-group">
+          <label>State / राज्य</label>
+          <input type="text" class="underline"/>
+        </div>
+        <div class="form-group">
+          <label>PIN Code / पिन कोड</label>
+          <input type="text" class="underline"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Membership Plan / सदस्यता योजना</h2>
+      <div class="checkbox-group">
+        <input type="checkbox" id="free" name="plan"/>
+        <label for="free">Free Volunteer (Nivritti) — निवृत्ति (₹0/year)</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="annual" name="plan"/>
+        <label for="annual">Annual Member (Sadhak) — साधक (₹365/year)</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="supporter" name="plan"/>
+        <label for="supporter">Supporter (Patron) — पेट्रॉन (₹1001/year)</label>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="lifetime" name="plan"/>
+        <label for="lifetime">Lifetime Member (Yugpakshi) — युगपक्षी (₹5001/lifetime)</label>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h2>Declaration / घोषणा</h2>
+      <p class="declaration">
+        I hereby declare that all information provided is true and correct to the best of my knowledge. I agree to abide by the constitution and guidelines of Sewarth Path Sansthanam.<br/><br/>
+        मैं यह घोषणा करता/करती हूँ कि प्रदत्त किसी भी जानकारी में सत्य है। मैं सेवार्थ पथ संस्थानम् के संविधान और दिशानिर्देशों का पालन करने के लिए सहमत हूँ।
+      </p>
+    </div>
+
+    <div class="signature-section">
+      <div class="signature-box">
+        <input type="text" class="signature-line" placeholder="Applicant Signature"/>
+        <p>Applicant Signature / आवेदक हस्ताक्षर</p>
+      </div>
+      <div class="signature-box">
+        <input type="text" class="signature-line" placeholder="Date"/>
+        <p>Date / तिथि</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Sewarth Path Sansthanam — Service is the Highest Dharma<br/>
+      सेवा परमो धर्म</p>
+      <p>For queries: contact@sewarthpathsansthanam.org | +91 XXXXXXXXXX</p>
+    </div>
+  </div>
+</body>
+</html>

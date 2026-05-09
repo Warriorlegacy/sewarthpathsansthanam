@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ID Card Template - Sewarth Path Sansthanam</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;600;700&display=swap');
+
+    :root {
+      --saffron: #E07B39;
+      --green: #2D6A4F;
+      --cream: #FFFBF5;
+      --dark: #1a1a1a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    .page-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      text-align: center;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .id-card {
+      width: 350px;
+      height: 525px; // 3.5" x 2.5" ratio (standard ID)
+      page-break-inside: avoid;
+      break-inside: avoid;
+      margin: 0 auto 2rem;
+      background: linear-gradient(135deg, var(--cream) 0%, white 100%);
+      border: 4px solid var(--saffron);
+      border-radius: 16px;
+      padding: 1.5rem;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .id-header {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .org-name {
+      font-size: 0.75rem;
+      color: var(--green);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+    }
+
+    .org-name-hi {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 0.9rem;
+      color: var(--saffron);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-type {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--green);
+      border: 2px solid var(--green);
+      display: inline-block;
+      padding: 0.25rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+
+    .photo-placeholder {
+      width: 120px;
+      height: 150px;
+      margin: 0 auto 1rem;
+      border: 2px dashed var(--saffron);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--saffron);
+      background: rgba(224, 123, 57, 0.05);
+    }
+
+    .member-info {
+      font-size: 0.9rem;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px dotted #ccc;
+      padding-bottom: 0.25rem;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: var(--green);
+    }
+
+    .info-value {
+      font-weight: 400;
+      color: var(--dark);
+    }
+
+    .qr-placeholder {
+      width: 80px;
+      height: 80px;
+      margin: 1rem auto 0;
+      border: 2px solid var(--green);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--green);
+      background: white;
+    }
+
+    .validity {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--saffron);
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .card-footer {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #888;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    .instructions {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--green);
+      margin-bottom: 2rem;
+    }
+
+    .instructions h3 {
+      color: var(--green);
+      margin-bottom: 0.75rem;
+    }
+
+    .instructions ol {
+      padding-left: 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .instructions li {
+      margin-bottom: 0.5rem;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+
+      .page-title {
+        display: none;
+      }
+
+      .id-card {
+        margin: 0;
+        border: 3px solid var(--saffron);
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+
+      .instructions {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <h1 class="page-title">ID Card Templates / ID कार्ड टेम्पलेट</h1>
+
+    <div class="instructions">
+      <h3>Instructions for Use:</h3>
+      <ol>
+        <li>Replace the photo placeholder with member's passport-size photograph.</li>
+        <li>Fill in member details in the underline spaces.</li>
+        <li>Generate QR code linking to verification page and replace placeholder.</li>
+        <li>Print on 350 gsm card paper for durability.</li>
+        <li>Use saffron/green color scheme consistent with NGO branding.</li>
+        <li>Verify membership status before issuance.</li>
+      </ol>
+    </div>
+
+    <!-- ID Card 1: Member -->
+    <div class="id-card">
+      <div class="id-header">
+        <div class="org-name">SEWARTH PATH SANSTHANAM</div>
+        <div class="org-name-hi">सेवार्थ पथ संस्थानम्</div>
+        <div class="card-type">सदस्य / MEMBER</div>
+      </div>
+
+      <div class="photo-placeholder">📷</div>
+
+      <div class="member-info">
+        <div class="info-row">
+          <span class="info-label">ID:</span>
+          <span class="info-value">_______________</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Name / नाम:</span>
+          <span class="info-value">___________________________</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Plan / योजना:</span>
+          <span class="info-value">_________________</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Join Date / सदस्यता:</span>
+          <span class="info-value">__________________</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Valid Upto / वैध:</span>
+          <span class="info-value">_________________</span>
+        </div>
+      </div>
+
+      <div class="qr-placeholder">QR</div>
+      <div class="validity">Scan to verify membership</div>
+
+      <div class="card-footer">
+        सेवा परमो धर्म — Service is the Highest Dharma<br/>
+        Registered Trust No: 202200996052093
+      </div>
+    </div>
+
+    <!-- ID Card 2: Volunteer -->
+    <div class="id-card">
+      <div class="id-header">
+        <div class="org-name">SEWARTH PATH SANSTHANAM</div>
+        <div class="org-name-hi">सेवार्थ पथ संस्थानम्</div>
+        <div class="card-type">स्वयंसेवक / VOLUNTEER</div>
+      </div>
+
+      <div class="photo-placeholder">📷</div>
+
+      <div class="member-info">
+        <div class="info-row">
+          <span class="info-label">Volunteer ID:</span>
+          <span class="info-value">_______________</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Name / नाम:</span>
+          <span class="info-value">___________________________</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Role / भूमिका:</span>
+          <span class="info-value">_________________</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Since / से:</span>
+          <span class="info-value">__________________</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Contact:</span>
+          <span class="info-value location-text">_________________</span>
+        </div>
+      </div>
+
+      <div class="qr-placeholder">QR</div>
+      <div class="validity">Scan to verify volunteer status</div>
+
+      <div class="card-footer">
+        सेवा परमो धर्म — Service is the Highest Dharma<br/>
+        Registered Trust No: 202200996052093
+      </div>
+    </div>
+  </div>
+</body>
+</html>

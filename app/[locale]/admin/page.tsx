@@ -22,6 +22,8 @@ import PeopleIcon from "@mui/icons-material/People";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import MailIcon from "@mui/icons-material/Mail";
+import DownloadsIcon from "@mui/icons-material/Downloads";
+import Button from "@mui/material/Button";
 
 export default async function AdminPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -92,7 +94,81 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
                     </Box>
                   </Stack>
                 </Paper>
-              </Grid>
+          </Grid>
+
+          {/* Download All Forms Card */}
+          <Grid item xs={12}>
+            <Paper
+              elevation={0}
+              sx={{
+                p: 4,
+                border: "2px solid var(--saffron)",
+                borderRadius: 2,
+                background: "linear-gradient(135deg, rgba(224,123,57,0.03) 0%, white 100%)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: { xs: "wrap", sm: "nowrap" },
+                gap: 3,
+              }}
+            >
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2.5 }}>
+                <Box
+                  sx={{
+                    width: 64,
+                    height: 64,
+                    borderRadius: 2,
+                    bgcolor: "rgba(224,123,57,0.1)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "2.5rem",
+                  }}
+                >
+                  📥
+                </Box>
+                <Box>
+                  <Typography
+                    variant="h5"
+                    fontWeight={700}
+                    sx={{ color: "var(--saffron)", mb: 0.5 }}
+                  >
+                    Download All Forms
+                    <Box component="span" sx={{ fontWeight: 400, fontSize: "0.9em", color: "text.secondary", ml: 1 }}>
+                      — सभी फॉर्म डाउनलोड
+                    </Box>
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ maxWidth: 600 }}
+                  >
+                    Get membership, volunteer, and certificate templates in a single ZIP file.
+                    <Box component="span" sx={{ display: { xs: "none", sm: "inline" } }}>
+                      {" "}Download membership form, volunteer application, ID card, and certificate templates ready for printing.
+                    </Box>
+                  </Typography>
+                </Box>
+              </Box>
+              <Button
+                variant="contained"
+                color="secondary"
+                size="large"
+                href="/api/admin/download-forms"
+                sx={{
+                  px: 4,
+                  py: 1.5,
+                  fontSize: "1rem",
+                  fontWeight: 600,
+                  bgcolor: "var(--green)",
+                  "&:hover": { bgcolor: "#1f4f39" },
+                  whiteSpace: "nowrap",
+                }}
+              >
+                📥 Download ZIP
+              </Button>
+            </Paper>
+          </Grid>
             ))}
           </Grid>
 

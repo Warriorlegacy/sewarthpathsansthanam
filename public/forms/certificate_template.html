@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certificate Template - Sewarth Path Sansthanam</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+    :root {
+      --saffron: #E07B39;
+      --green: #2D6A4F;
+      --cream: #FFFBF5;
+      --dark: #1a1a1a;
+      --gold: #D4AF37;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    .page-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      text-align: center;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .certificate {
+      width: 800px;
+      max-width: 100%;
+      min-height: 600px;
+      margin: 0 auto 3rem;
+      background: white;
+      border: 8px double var(--saffron);
+      border-radius: 8px;
+      padding: 2.5rem;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .certificate::before {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      right: 15px;
+      bottom: 15px;
+      border: 2px solid var(--green);
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    .cert-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .emblem {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 0.5rem;
+      border: 3px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: var(--gold);
+      background: linear-gradient(135deg, var(--cream) 0%, white 100%);
+    }
+
+    .org-name {
+      font-family: 'Playfair Display', 'Noto Sans Devanagari', serif;
+      font-size: 1.75rem;
+      color: var(--green);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .org-name-hi {
+      font-family: 'Noto Sans Devanagari', sans-serif;
+      font-size: 1.25rem;
+      color: var(--saffron);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      font-style: italic;
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cert-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--saffron);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .cert-subtitle {
+      text-align: center;
+      color: var(--green);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+
+    .cert-body {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+
+    .recipient-line {
+      margin: 2rem 0;
+      padding: 1rem;
+      border-top: 2px solid var(--green);
+      border-bottom: 2px solid var(--green);
+      background: rgba(45, 106, 79, 0.03);
+    }
+
+    .recipient-label {
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+
+    .recipient-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      color: var(--saffron);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .cert-details {
+      margin: 2rem 0;
+      line-height: 1.8;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      max-width: 500px;
+      margin: 0.5rem auto;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: var(--green);
+    }
+
+    .signature-section {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #ccc;
+    }
+
+    .sig-box {
+      width: 40%;
+      text-align: center;
+    }
+
+    .sig-line {
+      border: none;
+      border-bottom: 2px solid var(--dark);
+      width: 100%;
+      margin: 1.5rem auto 0.5rem;
+      text-align: center;
+      font-style: italic;
+    }
+
+    .sig-role {
+      font-size: 0.85rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .cert-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: #888;
+      font-style: italic;
+    }
+
+    .cert-id {
+      position: absolute;
+      bottom: 20px;
+      right: 25px;
+      font-size: 0.75rem;
+      color: #aaa;
+      font-family: monospace;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+
+      .page-title {
+        display: none;
+      }
+
+      .certificate {
+        margin: 0;
+        border: 6px double var(--saffron);
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <h1 class="page-title">Certificate Templates / प्रमाणपत्र टेम्पलेट</h1>
+
+    <!-- Certificate 1: Membership -->
+    <div class="certificate">
+      <div class="cert-header">
+        <div class="emblem">🕉️</div>
+        <div class="org-name">Sewarth Path Sansthanam</div>
+        <div class="org-name-hi">सेवार्थ पथ संस्थानम्</div>
+        <div class="tagline">" seva paramo dharmah " — Service is the Highest Dharma</div>
+      </div>
+
+      <div class="cert-title">Certificate of Membership</div>
+      <div class="cert-subtitle">सदस्यता प्रमाणपत्र</div>
+
+      <div class="cert-body">
+        <p>This is to certify that <strong>Sri/Smt. _______________________________</strong> has been enrolled as a <strong>_______________________</strong> member of Sewarth Path Sansthanam.</p>
+
+        <div class="cert-details">
+          <div class="detail-row">
+            <span class="detail-label">Membership ID:</span>
+            <span>____________________</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Membership Plan:</span>
+            <span>____________________</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Valid From:</span>
+            <span>____________________</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Valid Upto:</span>
+            <span>____________________</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipient-line">
+        <div class="recipient-label">मान्य/Authorized Signatory</div>
+      </div>
+
+      <div class="signature-section">
+        <div class="sig-box">
+          <input type="text" class="sig-line" placeholder="Signature"/>
+          <div class="sig-role">President / अध्यक्ष</div>
+        </div>
+        <div class="sig-box">
+          <input type="text" class="sig-line" placeholder="Signature"/>
+          <div class="sig-role">Secretary / सचिव</div>
+        </div>
+      </div>
+
+      <div class="cert-footer">
+        Sewarth Path Sansthanam, Varanasi — Reg. No. 202200996052093<br/>
+        सेवार्थ पथ संस्थानम्, वाराणसी
+      </div>
+
+      <div class="cert-id">ID: _________________</div>
+    </div>
+
+    <!-- Certificate 2: Volunteer -->
+    <div class="certificate">
+      <div class="cert-header">
+        <div class="emblem">🙏</div>
+        <div class="org-name">Sewarth Path Sansthanam</div>
+        <div class="org-name-hi">सेवार्थ पथ संस्थानम्</div>
+        <div class="tagline">" seva paramo dharmah " — Service is the Highest Dharma</div>
+      </div>
+
+      <div class="cert-title">Certificate of Appreciation</div>
+      <div class="cert-subtitle">सराहना प्रमाणपत्र</div>
+
+      <div class="cert-body">
+        <p>This certificate is awarded to <strong>________________________________</strong> in recognition of valuable volunteer services rendered to Sewarth Path Sansthanam.</p>
+
+        <div class="cert-details">
+          <div class="detail-row">
+            <span class="detail-label">Volunteer ID:</span>
+            <span>____________________</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Role / भूमिका:</span>
+            <span>____________________</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Service Period:</span>
+            <span>____________________</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Hours Contributed:</span>
+            <span>____________________</span>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.5rem; font-style: italic; color: #555;">
+          Your selfless service (seva) has made a meaningful impact on our community.<br/>
+          "यत् कृतं किल देवैर्भि हस्तस instrumental निष्फलम् । स्वकर्मणि तु तत् श्रेयाः स्वकर्मनिष्ठा हि सिद्धये॥"
+        </p>
+      </div>
+
+      <div class="recipient-line">
+        <div class="recipient-label">आशीर्वाद/Blessing</div>
+      </div>
+
+      <div class="signature-section">
+        <div class="sig-box">
+          <input type="text" class="sig-line" placeholder="Signature"/>
+          <div class="sig-role">President / अध्यक्ष</div>
+        </div>
+        <div class="sig-box">
+          <input type="text" class="sig-line" placeholder="Signature"/>
+          <div class="sig-role">Volunteer Coordinator<br/>स्वयंसेवक समन्वयक</div>
+        </div>
+      </div>
+
+      <div class="cert-footer">
+        Sewarth Path Sansthanam, Varanasi — Reg. No. 202200996052093<br/>
+        सेवार्थ पथ संस्थानम्, वाराणसी
+      </div>
+
+      <div class="cert-id">Cert ID: _________________</div>
+    </div>
+  </div>
+</body>
+</html>
