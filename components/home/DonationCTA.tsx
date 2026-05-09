@@ -91,12 +91,12 @@ export default function DonationCTA() {
         </Stack>
 
         <Stack direction={{ xs: "column", sm: "row" }} spacing={2} justifyContent="center">
-          <Button
-            component={Link}
-            href={`/${locale}/donate`}
-            variant="contained"
-            size="large"
-            startIcon={<VolunteerActivismIcon />}
+            <Button
+              component={Link}
+              href={`/${locale}/donate`}
+              variant="text"
+              size="large"
+              startIcon={<VolunteerActivismIcon />}
               sx={{
                 backgroundColor: "#ffffff !important",
                 color: "#E07B39 !important",
@@ -105,14 +105,17 @@ export default function DonationCTA() {
                 py: 1.5,
                 px: 4,
                 minHeight: 52,
-                boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+                borderRadius: "8px",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.4) !important",
+                zIndex: 10,
                 "&:hover": {
-                  backgroundColor: "rgba(255,255,255,0.92) !important",
+                  backgroundColor: "#f5f5f5 !important",
+                  color: "#E07B39 !important",
                 },
               }}
-          >
-            {locale === "hi" ? "अभी दान करें" : "Donate Now"}
-          </Button>
+            >
+              {locale === "hi" ? "अभी दान करें" : "Donate Now"}
+            </Button>
           <Button
             component={Link}
             href={`/${locale}/membership`}
