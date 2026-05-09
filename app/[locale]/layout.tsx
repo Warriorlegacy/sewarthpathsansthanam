@@ -5,6 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Script from "next/script";
 import theme from "@/lib/theme";
+import Chatbot from "@/components/ai/Chatbot";
 
 export default async function LocaleLayout({
   children,
@@ -38,6 +39,7 @@ export default async function LocaleLayout({
             <CssBaseline />
             <NextIntlClientProvider messages={messages} locale={locale}>
               {children}
+              <Chatbot />
             </NextIntlClientProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
