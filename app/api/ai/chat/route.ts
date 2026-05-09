@@ -2,20 +2,17 @@ import { Groq } from 'groq-sdk';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
-  const apiKey = process.env.GROQ_API_KEY;
-
-  if (!apiKey) {
-    return NextResponse.json(
-      { error: "AI Configuration Missing: GROQ_API_KEY not found in environment" },
-      { status: 500 }
-    );
-  }
-
-  const groq = new Groq({
-    apiKey: apiKey,
-  });
-
   try {
+    const apiKey = process.env.GROQ_API_KEY;
+    if (!apiKey) {
+      console.error("CRITICAL: GROQ_API_KEY is missing from environment variables");
+      return NextResponse.json(
+        { error: "AI service is currently unavailable. Please check environment variables." }, 
+        { status: 500 }
+      );
+    }
+
+    const groq = new Groq({ apiKey });
     const { messages } = await req.json();
 
     const systemPrompt = {
@@ -32,14 +29,18 @@ Knowledge Base:
 
     const completion = await groq.chat.completions.create({
       messages: [systemPrompt, ...messages],
-      model: 'llama3-70b-8192',
+      model: 'llama3-8b-8192',
+      temperature: 0.7,
+      max_tokens: 1024,
     });
 
-    return NextResponse.json({ response: completion.choices[0].message.content });
+    const responseText = completion.choices[0]?.message?.content || "I'm sorry, I couldn't generate a response. Please try again.";
+
+    return NextResponse.json({ response: responseText });
   } catch (error: any) {
-    console.error('Groq API Error:', error);
+    console.error('Groq API Error Detail:', error);
     return NextResponse.json(
-      { error: error.message || 'Internal Server Error' },
+      { error: `AI Error: ${error.message || 'Unknown error occurred'}` }, 
       { status: 500 }
     );
   }
