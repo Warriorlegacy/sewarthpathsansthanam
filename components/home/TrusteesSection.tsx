@@ -53,6 +53,18 @@ const trustees = [
     location: "Varanasi, UP",
     initials: "PK",
   },
+  {
+    name: "Piyush Raj Singh",
+    nameHi: "पियूष राज सिंह",
+    designation: "Technical Head",
+    designationHi: "तकनीकी प्रमुख",
+    location: "Varanasi, UP",
+    initials: "PRS",
+    link: "https://signhify.vercel.app/",
+    linkText: "Founder of Signhify Agency",
+    linkTextHi: "सिग्निफाई एजेंसी के संस्थापक",
+    image: "/images/piyush-profile.jpg",
+  },
 ];
 
 export default function TrusteesSection() {
@@ -74,7 +86,7 @@ export default function TrusteesSection() {
         </Box>
         <Grid container spacing={3} justifyContent="center">
           {trustees.map((trustee, i) => (
-            <Grid item xs={12} sm={6} md={i === 0 ? 4 : 3} key={trustee.name}>
+            <Grid item xs={12} sm={6} md={4} key={trustee.name}>
               <Card
                 sx={{
                   height: "100%",
@@ -99,6 +111,7 @@ export default function TrusteesSection() {
                 <CardContent sx={{ p: 3, pt: trustee.primary ? 3.5 : 3 }}>
                   <Stack alignItems="center" spacing={1.5}>
                     <Avatar
+                      src={trustee.image}
                       sx={{
                         width: trustee.primary ? 72 : 60,
                         height: trustee.primary ? 72 : 60,
@@ -107,7 +120,7 @@ export default function TrusteesSection() {
                         fontWeight: 700,
                       }}
                     >
-                      {trustee.initials}
+                      {!trustee.image && trustee.initials}
                     </Avatar>
                     <Box>
                       <Typography
@@ -126,6 +139,27 @@ export default function TrusteesSection() {
                       <Typography variant="caption" color="text.secondary">
                         {trustee.location}
                       </Typography>
+                      {trustee.link && (
+                        <Typography
+                          component="a"
+                          href={trustee.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          variant="caption"
+                          sx={{
+                            color: "primary.main",
+                            textDecoration: "underline",
+                            display: "block",
+                            mt: 1,
+                            fontWeight: 500,
+                            "&:hover": {
+                              color: "secondary.main",
+                            },
+                          }}
+                        >
+                          {locale === "hi" ? trustee.linkTextHi : trustee.linkText}
+                        </Typography>
+                      )}
                     </Box>
                   </Stack>
                 </CardContent>
