@@ -97,19 +97,19 @@ export default function DonationCTA() {
             variant="contained"
             size="large"
             startIcon={<VolunteerActivismIcon />}
-            sx={{
-              bgcolor: "#fff",
-              color: "#E07B39",
-              fontWeight: 700,
-              fontSize: "1.05rem",
-              py: 1.5,
-              px: 4,
-              minHeight: 52,
-               boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
-               "&:hover": {
-                 bgcolor: "rgba(255,255,255,0.92)",
-               },
-            }}
+              sx={{
+                backgroundColor: "#ffffff !important",
+                color: "#E07B39 !important",
+                fontWeight: 800,
+                fontSize: "1.05rem",
+                py: 1.5,
+                px: 4,
+                minHeight: 52,
+                boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
+                "&:hover": {
+                  backgroundColor: "rgba(255,255,255,0.92) !important",
+                },
+              }}
           >
             {locale === "hi" ? "अभी दान करें" : "Donate Now"}
           </Button>
