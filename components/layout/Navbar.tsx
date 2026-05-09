@@ -63,33 +63,38 @@ export default function Navbar() {
           {/* Logo */}
           <Link href={`/${locale}`} style={{ textDecoration: "none", color: "inherit" }}>
             <Stack direction="row" alignItems="center" spacing={1.5}>
-              <Box
-                sx={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: "50%",
-                  background: "linear-gradient(135deg, #E07B39, #C9920C)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
-                }}
-              >
-                <FavoriteIcon sx={{ color: "#fff", fontSize: 22 }} />
-              </Box>
-              <Box>
-                <Typography
-                  variant="subtitle2"
-                  sx={{ fontFamily: "'Noto Sans Devanagari', sans-serif", fontWeight: 700, color: "primary.main", lineHeight: 1.2, fontSize: "0.85rem" }}
-                >
-                  सेवार्थ पथ संस्थानम्
-                </Typography>
-                <Typography
-                  variant="caption"
-                  sx={{ color: "text.secondary", lineHeight: 1.1, fontSize: "0.7rem" }}
-                >
-                  Sewarth Path Sansthanam
-                </Typography>
+               <Box
+                 sx={{
+                   width: 40,
+                   height: 40,
+                   borderRadius: "50%",
+                   overflow: "hidden",
+                   flexShrink: 0,
+                   border: "1px solid rgba(0,0,0,0.05)",
+                 }}
+               >
+                 <img src="/images/logo.png" alt="Logo" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+               </Box>
+               <Box>
+                 <Typography
+                   variant="subtitle2"
+                   sx={{ fontFamily: "'Noto Sans Devanagari', sans-serif", fontWeight: 700, color: "primary.main", lineHeight: 1.2, fontSize: "0.85rem" }}
+                 >
+                   सेवार्थ पथ संस्थानम्
+                 </Typography>
+                 <Typography
+                   variant="caption"
+                   sx={{ color: "text.secondary", lineHeight: 1.1, fontSize: "0.7rem" }}
+                 >
+                   Sewarth Path Sansthanam
+                 </Typography>
+                 <Typography
+                   variant="caption"
+                   sx={{ color: "secondary.main", lineHeight: 1.1, fontSize: "0.65rem", fontWeight: 600, display: "block", mt: 0.2 }}
+                 >
+                   एकोहं द्वितीयो नास्ति
+                 </Typography>
+               </Box>
               </Box>
             </Stack>
           </Link>

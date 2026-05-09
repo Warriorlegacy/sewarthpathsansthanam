@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
+import { groq } from "@/lib/groq";
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,6 +12,31 @@ export async function POST(req: NextRequest) {
     }
 
     const supabase = await createServiceClient();
+
+    // AI Volunteer Analysis
+    let aiTags: string[] = [];
+    try {
+      const prompt = `Analyze the following volunteer application and generate 3-5 descriptive "AI tags" (short phrases like "High Empathy", "Tech Savvy", "Education Expert", "Community Leader") that summarize the applicant's profile based on their interests and message.
+
+Application Data:
+Interests: ${JSON.stringify(interests)}
+Message: ${message}`;
+
+      const chatCompletion = await groq.chat.completions.create({
+        messages: [{ role: "user", content: prompt }],
+        model: "llama3-8b-8192",
+        response_format: { type: "json_object" },
+      });
+
+      const content = chatCompletion.choices[0]?.message?.content;
+      if (content) {
+        const parsed = JSON.parse(content);
+        aiTags = Array.isArray(parsed) ? parsed : (parsed.tags || []);
+      }
+    } catch (aiError) {
+      console.error("AI volunteer analysis failed:", aiError);
+      // Continue without tags
+    }
 
     await supabase.from("volunteer_applications").insert({
       full_name: name,
@@ -24,6 +50,7 @@ export async function POST(req: NextRequest) {
       how_heard: howHeard || null,
       message: message || null,
       status: "pending",
+      tags: aiTags,
     });
 
     return NextResponse.json({ success: true });

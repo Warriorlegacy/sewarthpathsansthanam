@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import { createServiceClient } from "@/lib/supabase/server";
 import { randomUUID } from "crypto";
+import { sendWelcomeEmail } from "@/lib/resend";
 
 export async function POST(req: NextRequest) {
   try {
@@ -52,6 +53,12 @@ export async function POST(req: NextRequest) {
         })
         .select("id")
         .single();
+
+      sendWelcomeEmail({
+        email,
+        name,
+        type: planCode === "VOL_FREE" ? "volunteer" : "member",
+      }).catch((err) => console.error("Failed to send welcome email:", err));
 
       return NextResponse.json({ success: true, membershipId: membership?.id, publicMemberId });
     }

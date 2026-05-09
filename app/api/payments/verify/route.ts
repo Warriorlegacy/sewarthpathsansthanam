@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { createServiceClient } from "@/lib/supabase/server";
+import { sendReceiptEmail } from "@/lib/resend";
 
 export async function POST(req: NextRequest) {
   try {
@@ -25,6 +26,12 @@ export async function POST(req: NextRequest) {
     const supabase = await createServiceClient();
 
     if (donationId) {
+      const { data: donation } = await supabase
+        .from("donations")
+        .select("email, donor_name, amount, purpose")
+        .eq("id", donationId)
+        .single();
+
       await supabase
         .from("donations")
         .update({
@@ -33,17 +40,57 @@ export async function POST(req: NextRequest) {
           paid_at: new Date().toISOString(),
         })
         .eq("id", donationId);
+
+      if (donation) {
+        sendReceiptEmail({
+          email: donation.email,
+          name: donation.donor_name || "Donor",
+          amount: donation.amount,
+          purpose: donation.purpose,
+          receiptNumber: razorpay_payment_id,
+        }).catch((err) => console.error("Failed to send donation receipt:", err));
+      }
     }
 
     if (membershipId) {
-      await supabase
+      const { data: membership } = await supabase
         .from("memberships")
-        .update({
-          status: "active",
-          razorpay_payment_id,
-          activated_at: new Date().toISOString(),
-        })
-        .eq("id", membershipId);
+        .select("user_id")
+        .eq("id", membershipId)
+        .single();
+
+      if (membership) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("email, full_name")
+          .eq("id", membership.user_id)
+          .single();
+
+        const { data: plan } = await supabase
+          .from("membership_plans")
+          .select("price")
+          .eq("id", (await supabase.from("memberships").select("plan_id").eq("id", membershipId).single()).data?.plan_id)
+          .single();
+
+        await supabase
+          .from("memberships")
+          .update({
+            status: "active",
+            razorpay_payment_id,
+            activated_at: new Date().toISOString(),
+          })
+          .eq("id", membershipId);
+
+        if (profile) {
+          sendReceiptEmail({
+            email: profile.email,
+            name: profile.full_name || "Member",
+            amount: plan?.price || 0,
+            purpose: "Membership Fee",
+            receiptNumber: razorpay_payment_id,
+          }).catch((err) => console.error("Failed to send membership receipt:", err));
+        }
+      }
     }
 
     await supabase.from("payment_events").insert({

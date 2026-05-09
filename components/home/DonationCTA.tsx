@@ -105,10 +105,10 @@ export default function DonationCTA() {
               py: 1.5,
               px: 4,
               minHeight: 52,
-              boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
-              "&:hover": {
-                bgcolor: "rgba(255,255,255,0.92)",
-              },
+               boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
+               "&:hover": {
+                 bgcolor: "rgba(255,255,255,0.92)",
+               },
             }}
           >
             {locale === "hi" ? "अभी दान करें" : "Donate Now"}

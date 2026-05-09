@@ -22,6 +22,18 @@ const trustees = [
     primary: true,
   },
   {
+    name: "Piyush Raj Singh",
+    nameHi: "पियूष राज सिंह",
+    designation: "Technical Head",
+    designationHi: "तकनीकी प्रमुख",
+    location: "Varanasi, UP",
+    initials: "PRS",
+    link: "https://signhify.vercel.app/",
+    linkText: "Founder of Signhify Agency",
+    linkTextHi: "सिग्निफाई एजेंसी के संस्थापक",
+    image: "/images/piyush-profile.jpg",
+  },
+  {
     name: "Smt. Madhu Pandey",
     nameHi: "श्रीमती मधु पाण्डेय",
     designation: "Trustee Member",
@@ -52,18 +64,6 @@ const trustees = [
     designationHi: "न्यासी सदस्य",
     location: "Varanasi, UP",
     initials: "PK",
-  },
-  {
-    name: "Piyush Raj Singh",
-    nameHi: "पियूष राज सिंह",
-    designation: "Technical Head",
-    designationHi: "तकनीकी प्रमुख",
-    location: "Varanasi, UP",
-    initials: "PRS",
-    link: "https://signhify.vercel.app/",
-    linkText: "Founder of Signhify Agency",
-    linkTextHi: "सिग्निफाई एजेंसी के संस्थापक",
-    image: "/images/piyush-profile.jpg",
   },
 ];
 
