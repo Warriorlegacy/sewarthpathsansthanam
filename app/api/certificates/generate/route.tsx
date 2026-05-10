@@ -118,7 +118,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Return PDF response
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(pdfBuffer as Uint8Array, {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `inline; filename="${sanitizedName}_certificate.pdf"`,
