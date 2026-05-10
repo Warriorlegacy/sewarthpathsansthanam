@@ -1,45 +1,28 @@
 import fs from 'fs/promises';
-import { Readable } from 'stream';
+import JSZip from 'jszip';
 
 export async function generateFormsZip(
   formsDir: string,
   formFiles: { src: string; dest: string }[]
 ): Promise<ReadableStream> {
-  const archiver = (await import('archiver')).default;
-  const archive = archiver('zip', { zlib: { level: 9 } });
+  const zip = new JSZip();
 
-  const stream = new ReadableStream({
+  for (const file of formFiles) {
+    try {
+      const filePath = `${formsDir}/${file.src}`;
+      const content = await fs.readFile(filePath);
+      zip.file(file.dest, content);
+    } catch (err) {
+      console.warn(`File not found or could not be read: ${file.src}`, err);
+    }
+  }
+
+  const uint8array = await zip.generateAsync({ type: 'uint8array' });
+
+  return new ReadableStream({
     start(controller) {
-      archive.on('data', (chunk: Buffer) => {
-        controller.enqueue(chunk);
-      });
-
-      archive.on('end', () => {
-        controller.close();
-      });
-
-      archive.on('error', (err: Error) => {
-        controller.error(err);
-      });
-
-      (async () => {
-        try {
-          for (const file of formFiles) {
-            const filePath = `${formsDir}/${file.src}`;
-            try {
-              const content = await fs.readFile(filePath);
-              archive.append(content, { name: file.dest });
-            } catch (err) {
-              console.warn(`File not found: ${filePath}`);
-            }
-          }
-          await archive.finalize();
-        } catch (err) {
-          controller.error(err as Error);
-        }
-      })();
+      controller.enqueue(uint8array);
+      controller.close();
     },
   });
-
-  return stream;
 }
