@@ -34,14 +34,17 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
 
   const serviceClient = await createServiceClient();
   
-  const profileResult = await serviceClient
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .maybeSingle()
-    .catch(() => ({ data: null }));
-
-  const profile = profileResult.data;
+  let profile;
+  try {
+    const profileResult = await serviceClient
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .maybeSingle();
+    profile = profileResult.data;
+  } catch (e) {
+    console.error("Fetch profile failed:", e);
+  }
 
   if (!profile || profile.role !== "admin") redirect(`/${locale}/dashboard`);
 
@@ -50,35 +53,67 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
   let memberCount = 0;
   let donationCount = 0;
   let messageCount = 0;
-  let recentVolunteers = [];
-  let recentMembers = [];
-  let recentMessages = [];
-  let donationStats = [];
+  let recentVolunteers: any[] = [];
+  let recentMembers: any[] = [];
+  let recentMessages: any[] = [];
+  let donationStats: any[] = [];
 
-  // Isolated Fetching with individual catch handlers
-  const vCountRes = await serviceClient.from("volunteer_applications").select("*", { count: "exact", head: true }).catch(() => ({ count: 0 }));
-  volunteerCount = vCountRes.count ?? 0;
+  // Isolated Fetching with individual try-catch blocks
+  try {
+    const { count } = await serviceClient.from("volunteer_applications").select("*", { count: "exact", head: true });
+    volunteerCount = count ?? 0;
+  } catch (e) {
+    console.error("Fetch volunteer count failed:", e);
+  }
 
-  const mCountRes = await serviceClient.from("memberships").select("*", { count: "exact", head: true }).eq("status", "active").catch(() => ({ count: 0 }));
-  memberCount = mCountRes.count ?? 0;
+  try {
+    const { count } = await serviceClient.from("memberships").select("*", { count: "exact", head: true }).eq("status", "active");
+    memberCount = count ?? 0;
+  } catch (e) {
+    console.error("Fetch member count failed:", e);
+  }
 
-  const dCountRes = await serviceClient.from("donations").select("*", { count: "exact", head: true }).eq("status", "completed").catch(() => ({ count: 0 }));
-  donationCount = dCountRes.count ?? 0;
+  try {
+    const { count } = await serviceClient.from("donations").select("*", { count: "exact", head: true }).eq("status", "completed");
+    donationCount = count ?? 0;
+  } catch (e) {
+    console.error("Fetch donation count failed:", e);
+  }
 
-  const msgCountRes = await serviceClient.from("contact_messages").select("*", { count: "exact", head: true }).eq("status", "unread").catch(() => ({ count: 0 }));
-  messageCount = msgCountRes.count ?? 0;
+  try {
+    const { count } = await serviceClient.from("contact_messages").select("*", { count: "exact", head: true }).eq("status", "unread");
+    messageCount = count ?? 0;
+  } catch (e) {
+    console.error("Fetch message count failed:", e);
+  }
 
-  const vDataRes = await serviceClient.from("volunteer_applications").select("*").order("created_at", { ascending: false }).limit(5).catch(() => ({ data: [] }));
-  recentVolunteers = vDataRes.data ?? [];
+  try {
+    const { data } = await serviceClient.from("volunteer_applications").select("*").order("created_at", { ascending: false }).limit(5);
+    recentVolunteers = data ?? [];
+  } catch (e) {
+    console.error("Fetch recent volunteers failed:", e);
+  }
 
-  const mDataRes = await serviceClient.from("memberships").select("*, profiles(full_name, email)").order("created_at", { ascending: false }).limit(5).catch(() => ({ data: [] }));
-  recentMembers = mDataRes.data ?? [];
+  try {
+    const { data } = await serviceClient.from("memberships").select("*, profiles(full_name, email)").order("created_at", { ascending: false }).limit(5);
+    recentMembers = data ?? [];
+  } catch (e) {
+    console.error("Fetch recent members failed:", e);
+  }
 
-  const msgDataRes = await serviceClient.from("contact_messages").select("*").eq("status", "unread").order("created_at", { ascending: false }).limit(5).catch(() => ({ data: [] }));
-  recentMessages = msgDataRes.data ?? [];
+  try {
+    const { data } = await serviceClient.from("contact_messages").select("*").eq("status", "unread").order("created_at", { ascending: false }).limit(5);
+    recentMessages = data ?? [];
+  } catch (e) {
+    console.error("Fetch recent messages failed:", e);
+  }
 
-  const dStatsRes = await serviceClient.from("donations").select("amount, purpose").eq("status", "completed").catch(() => ({ data: [] }));
-  donationStats = dStatsRes.data ?? [];
+  try {
+    const { data } = await serviceClient.from("donations").select("amount, purpose").eq("status", "completed");
+    donationStats = data ?? [];
+  } catch (e) {
+    console.error("Fetch donation stats failed:", e);
+  }
 
   const totalDonated = (Array.isArray(donationStats) ? donationStats : []).reduce((acc, d) => acc + (d?.amount ?? 0), 0);
 
