@@ -1,6 +1,8 @@
 import { Resend } from 'resend';
 import { groq } from './groq';
 
+const resend = new Resend(process.env.RESEND_API_KEY || '');
+
 export async function sendWelcomeEmail({ email, name, type }: { email: string; name: string; type?: string }) {
   return resend.emails.send({
     from: 'Sewarth Path Sansthanam <onboarding@resend.dev>',
