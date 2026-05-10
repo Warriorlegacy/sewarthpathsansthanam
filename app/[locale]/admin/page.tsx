@@ -33,37 +33,60 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
   if (!user) redirect(`/${locale}/login`);
 
   const serviceClient = await createServiceClient();
-  const { data: profile } = await serviceClient.from("profiles").select("role").eq("id", user.id).maybeSingle();
+  
+  const profileResult = await serviceClient
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle()
+    .catch(() => ({ data: null }));
 
-  if (profile?.role !== "admin") redirect(`/${locale}/dashboard`);
+  const profile = profileResult.data;
 
-  const [
-    { count: volunteerCount },
-    { count: memberCount },
-    { count: donationCount },
-    { count: messageCount },
-    { data: recentVolunteers },
-    { data: recentMembers },
-    { data: recentMessages },
-    { data: donationStats },
-  ] = await Promise.all([
-    serviceClient.from("volunteer_applications").select("*", { count: "exact", head: true }),
-    serviceClient.from("memberships").select("*", { count: "exact", head: true }).eq("status", "active"),
-    serviceClient.from("donations").select("*", { count: "exact", head: true }).eq("status", "completed"),
-    serviceClient.from("contact_messages").select("*", { count: "exact", head: true }).eq("status", "unread"),
-    serviceClient.from("volunteer_applications").select("*").order("created_at", { ascending: false }).limit(5),
-    serviceClient.from("memberships").select("*, profiles(full_name, email)").order("created_at", { ascending: false }).limit(5),
-    serviceClient.from("contact_messages").select("*").eq("status", "unread").order("created_at", { ascending: false }).limit(5),
-    serviceClient.from("donations").select("amount, purpose").eq("status", "completed"),
-  ]);
+  if (!profile || profile.role !== "admin") redirect(`/${locale}/dashboard`);
 
-  const totalDonated = donationStats?.reduce((acc, d) => acc + (d.amount ?? 0), 0) ?? 0;
+  // Safe Defaults
+  let volunteerCount = 0;
+  let memberCount = 0;
+  let donationCount = 0;
+  let messageCount = 0;
+  let recentVolunteers = [];
+  let recentMembers = [];
+  let recentMessages = [];
+  let donationStats = [];
+
+  // Isolated Fetching with individual catch handlers
+  const vCountRes = await serviceClient.from("volunteer_applications").select("*", { count: "exact", head: true }).catch(() => ({ count: 0 }));
+  volunteerCount = vCountRes.count ?? 0;
+
+  const mCountRes = await serviceClient.from("memberships").select("*", { count: "exact", head: true }).eq("status", "active").catch(() => ({ count: 0 }));
+  memberCount = mCountRes.count ?? 0;
+
+  const dCountRes = await serviceClient.from("donations").select("*", { count: "exact", head: true }).eq("status", "completed").catch(() => ({ count: 0 }));
+  donationCount = dCountRes.count ?? 0;
+
+  const msgCountRes = await serviceClient.from("contact_messages").select("*", { count: "exact", head: true }).eq("status", "unread").catch(() => ({ count: 0 }));
+  messageCount = msgCountRes.count ?? 0;
+
+  const vDataRes = await serviceClient.from("volunteer_applications").select("*").order("created_at", { ascending: false }).limit(5).catch(() => ({ data: [] }));
+  recentVolunteers = vDataRes.data ?? [];
+
+  const mDataRes = await serviceClient.from("memberships").select("*, profiles(full_name, email)").order("created_at", { ascending: false }).limit(5).catch(() => ({ data: [] }));
+  recentMembers = mDataRes.data ?? [];
+
+  const msgDataRes = await serviceClient.from("contact_messages").select("*").eq("status", "unread").order("created_at", { ascending: false }).limit(5).catch(() => ({ data: [] }));
+  recentMessages = msgDataRes.data ?? [];
+
+  const dStatsRes = await serviceClient.from("donations").select("amount, purpose").eq("status", "completed").catch(() => ({ data: [] }));
+  donationStats = dStatsRes.data ?? [];
+
+  const totalDonated = (Array.isArray(donationStats) ? donationStats : []).reduce((acc, d) => acc + (d?.amount ?? 0), 0);
 
   const stats = [
-    { label: "Volunteers Applied", value: volunteerCount ?? 0, icon: <PeopleIcon />, color: "#2D6A4F" },
-    { label: "Active Members", value: memberCount ?? 0, icon: <CardMembershipIcon />, color: "#E07B39" },
+    { label: "Volunteers Applied", value: volunteerCount, icon: <PeopleIcon />, color: "#2D6A4F" },
+    { label: "Active Members", value: memberCount, icon: <CardMembershipIcon />, color: "#E07B39" },
     { label: "Total Donated", value: `₹${totalDonated.toLocaleString("en-IN")}`, icon: <FileDownloadIcon />, color: "#C9920C" },
-    { label: "Unread Messages", value: messageCount ?? 0, icon: <MailIcon />, color: "#1565C0" },
+    { label: "Unread Messages", value: messageCount, icon: <MailIcon />, color: "#1565C0" },
   ];
 
   return (
@@ -178,21 +201,21 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
               <Paper elevation={0} sx={{ p: 3, border: "1px solid rgba(0,0,0,0.08)", borderRadius: 2 }}>
                 <Typography variant="h6" fontWeight={700} sx={{ mb: 2 }}>Recent Volunteers</Typography>
                 <Stack spacing={1.5}>
-                  {(recentVolunteers ?? []).map((v) => (
-                    <Stack key={v.id} direction="row" justifyContent="space-between" alignItems="center"
+                  {(Array.isArray(recentVolunteers) ? recentVolunteers : []).map((v) => (
+                    <Stack key={v?.id} direction="row" justifyContent="space-between" alignItems="center"
                       sx={{ p: 1.5, bgcolor: "rgba(0,0,0,0.02)", borderRadius: 1 }}>
                       <Box>
-                        <Typography variant="body2" fontWeight={600}>{v.full_name}</Typography>
-                        <Typography variant="caption" color="text.secondary">{v.phone} · {v.city}</Typography>
+                        <Typography variant="body2" fontWeight={600}>{v?.full_name ?? "—"}</Typography>
+                        <Typography variant="caption" color="text.secondary">{v?.phone ?? "—"} · {v?.city ?? "—"}</Typography>
                       </Box>
                       <Stack direction="row" spacing={2} alignItems="center">
-                        <VolunteerActions id={v.id} status={v.status} />
-                        <Chip label={v.status} size="small"
-                          sx={{ bgcolor: v.status === "approved" ? "#2D6A4F20" : "#E07B3920", color: v.status === "approved" ? "#2D6A4F" : "#E07B39", fontWeight: 600 }} />
+                        <VolunteerActions id={v?.id} status={v?.status} />
+                        <Chip label={v?.status ?? "unknown"} size="small"
+                          sx={{ bgcolor: v?.status === "approved" ? "#2D6A4F20" : "#E07B3920", color: v?.status === "approved" ? "#2D6A4F" : "#E07B39", fontWeight: 600 }} />
                       </Stack>
                     </Stack>
                   ))}
-                  {!recentVolunteers?.length && (
+                  {(!Array.isArray(recentVolunteers) || recentVolunteers.length === 0) && (
                     <Typography variant="body2" color="text.secondary">No applications yet.</Typography>
                   )}
                 </Stack>
@@ -204,24 +227,24 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
               <Paper elevation={0} sx={{ p: 3, border: "1px solid rgba(0,0,0,0.08)", borderRadius: 2 }}>
                 <Typography variant="h6" fontWeight={700} sx={{ mb: 2 }}>Recent Members</Typography>
                 <Stack spacing={1.5}>
-                  {(recentMembers ?? []).map((m) => {
-                    const p = m.profiles as { full_name?: string; email?: string } | null;
+                  {(Array.isArray(recentMembers) ? recentMembers : []).map((m) => {
+                    const p = m?.profiles as { full_name?: string; email?: string } | null;
                     return (
-                      <Stack key={m.id} direction="row" justifyContent="space-between" alignItems="center"
+                      <Stack key={m?.id} direction="row" justifyContent="space-between" alignItems="center"
                         sx={{ p: 1.5, bgcolor: "rgba(0,0,0,0.02)", borderRadius: 1 }}>
                         <Box>
                           <Typography variant="body2" fontWeight={600}>{p?.full_name ?? "—"}</Typography>
-                          <Typography variant="caption" color="text.secondary">{m.plan_code} · {m.public_member_id}</Typography>
+                          <Typography variant="caption" color="text.secondary">{m?.plan_code ?? "—"} · {m?.public_member_id ?? "—"}</Typography>
                         </Box>
                         <Stack direction="row" spacing={2} alignItems="center">
-                          <MembershipActions id={m.id} status={m.status} />
-                          <Chip label={m.status} size="small"
-                            sx={{ bgcolor: m.status === "active" ? "#2D6A4F20" : "#E07B3920", color: m.status === "active" ? "#2D6A4F" : "#E07B39", fontWeight: 600 }} />
+                          <MembershipActions id={m?.id} status={m?.status} />
+                          <Chip label={m?.status ?? "unknown"} size="small"
+                            sx={{ bgcolor: m?.status === "active" ? "#2D6A4F20" : "#E07B3920", color: m?.status === "active" ? "#2D6A4F" : "#E07B39", fontWeight: 600 }} />
                         </Stack>
                       </Stack>
                     );
                   })}
-                  {!recentMembers?.length && (
+                  {(!Array.isArray(recentMembers) || recentMembers.length === 0) && (
                     <Typography variant="body2" color="text.secondary">No members yet.</Typography>
                   )}
                 </Stack>
@@ -232,7 +255,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
             <Grid item xs={12}>
               <Paper elevation={0} sx={{ p: 3, border: "1px solid rgba(0,0,0,0.08)", borderRadius: 2 }}>
                 <Typography variant="h6" fontWeight={700} sx={{ mb: 2 }}>Unread Contact Messages</Typography>
-                {(recentMessages ?? []).length > 0 ? (
+                {(Array.isArray(recentMessages) && recentMessages.length > 0) ? (
                   <Table size="small">
                     <TableHead>
                       <TableRow>
@@ -243,12 +266,12 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {(recentMessages ?? []).map((msg) => (
-                        <TableRow key={msg.id}>
-                          <TableCell>{msg.full_name}</TableCell>
-                          <TableCell>{msg.email}</TableCell>
-                          <TableCell>{msg.subject ?? "—"}</TableCell>
-                          <TableCell>{new Date(msg.created_at).toLocaleDateString("en-IN")}</TableCell>
+                      {(Array.isArray(recentMessages) ? recentMessages : []).map((msg) => (
+                        <TableRow key={msg?.id}>
+                          <TableCell>{msg?.full_name ?? "—"}</TableCell>
+                          <TableCell>{msg?.email ?? "—"}</TableCell>
+                          <TableCell>{msg?.subject ?? "—"}</TableCell>
+                          <TableCell>{msg?.created_at ? new Date(msg.created_at).toLocaleDateString("en-IN") : "—"}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
