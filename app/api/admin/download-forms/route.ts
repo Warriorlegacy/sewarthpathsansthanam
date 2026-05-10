@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import archiver from "archiver";
+// @ts-ignore
+const archiver = require("archiver");
 import { readFile } from "fs/promises";
 import { existsSync } from "fs";
 import path from "path";
