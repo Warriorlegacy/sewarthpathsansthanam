@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-// @ts-ignore
-const archiver = require("archiver");
-import { readFile } from "fs/promises";
-import { existsSync } from "fs";
+import { generateFormsZip } from "@/lib/utils/zip-generator";
 import path from "path";
 
 export async function GET(req: NextRequest) {
@@ -18,52 +15,13 @@ export async function GET(req: NextRequest) {
   const zipFileName = "sewarth_forms.zip";
 
   try {
-    const archive = archiver("zip", {
-      zlib: { level: 9 },
-    });
-
-    const headers = {
-      "Content-Type": "application/zip",
-      "Content-Disposition": `attachment; filename="${zipFileName}"`,
-    };
-
-    const stream = new ReadableStream({
-      async start(controller) {
-        try {
-          archive.on("error", (err) => {
-            console.error("Archiver error:", err);
-            if (!controller.error(err)) {
-              console.error("Cannot enqueue further chunks, aborting");
-            }
-          });
-
-          archive.pipe(controller.enqueue(new Uint8Array(0)));
-
-          // Append available files
-          for (const file of formFiles) {
-            const filePath = path.join(formsDir, file.src);
-            if (existsSync(filePath)) {
-              const fileBuffer = await readFile(filePath);
-              archive.append(fileBuffer, { name: file.dest });
-            } else {
-              console.warn(`File not found, skipping: ${file.src}`);
-            }
-          }
-
-          archive.finalize();
-          archive.on("end", () => {
-            controller.close();
-          });
-        } catch (error) {
-          console.error("Zip creation error:", error);
-          if (!controller.error(error)) {
-            console.error("Cannot enqueue error, aborting");
-          }
-        }
+    const stream = await generateFormsZip(formsDir, formFiles);
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "application/zip",
+        "Content-Disposition": `attachment; filename="${zipFileName}"`,
       },
     });
-
-    return new Response(stream, { headers });
   } catch (error) {
     console.error("ZIP generation failed:", error);
     return NextResponse.json(
