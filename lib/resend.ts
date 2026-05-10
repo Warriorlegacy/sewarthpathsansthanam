@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 import { groq } from './groq';
 
-export async function sendWelcomeEmail({ email, name }: { email: string; name: string }) {
+export async function sendWelcomeEmail({ email, name, type }: { email: string; name: string; type?: string }) {
   return resend.emails.send({
     from: 'Sewarth Path Sansthanam <onboarding@resend.dev>',
     to: email,
