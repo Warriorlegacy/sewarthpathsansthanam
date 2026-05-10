@@ -260,6 +260,7 @@ interface CertificatePDFProps {
   eventName?: string;
   date: string;
   volunteerHours?: string;
+  logoBase64?: string;
 }
 
 export function CertificatePDF({
@@ -269,6 +270,7 @@ export function CertificatePDF({
   eventName,
   date,
   volunteerHours,
+  logoBase64,
 }: CertificatePDFProps) {
   const getCertificateTitle = () => {
     switch (certificateType) {
@@ -322,12 +324,14 @@ export function CertificatePDF({
             <Text style={[styles.corner, styles.cornerBL]}>🪷</Text>
             <Text style={[styles.corner, styles.cornerBR]}>🪷</Text>
 
-            <View style={styles.inner}>
-              <View style={styles.header}>
-                <View style={styles.logoCircle}>
-                  <Image src="logo" style={{ width: 50, height: 50 }} />
-                </View>
-                <View style={styles.orgName}>
+             <View style={styles.inner}>
+               <View style={styles.header}>
+                 {logoBase64 && (
+                   <View style={styles.logoCircle}>
+                     <Image src={logoBase64} style={{ width: 50, height: 50 }} />
+                   </View>
+                 )}
+                 <View style={styles.orgName}>
                   <Text style={styles.orgHindi}>सेवार्थ पथ संस्थानम्</Text>
                   <Text style={styles.orgEnglish}>SEVARTH PATH SANSTHANAM</Text>
                   <Text style={styles.orgReg}>Reg. No.: SPS/2025/0042</Text>

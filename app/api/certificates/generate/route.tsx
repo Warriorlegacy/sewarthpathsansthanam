@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
 import { CertificatePDF } from "@/components/certificate/CertificatePDF";
-import { renderToBuffer, Font, registerImage } from "@react-pdf/renderer";
+import { renderToBuffer, Font } from "@react-pdf/renderer";
 import fs from "fs";
 import path from "path";
 
@@ -26,15 +26,6 @@ Font.register({
   family: "Poppins",
   src: "https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfecg.woff2",
 });
-
-// Register logo image from public folder
-try {
-  const logoPath = path.join(process.cwd(), "public", "images", "logo.png");
-  const logoBuffer = fs.readFileSync(logoPath);
-  registerImage("logo", logoBuffer);
-} catch (err) {
-  console.error("Failed to register logo image for PDF:", err);
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -61,6 +52,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Read logo as base64
+    const logoPath = path.join(process.cwd(), "public", "images", "logo.png");
+    const logoBuffer = fs.readFileSync(logoPath);
+    const logoBase64 = logoBuffer.toString("base64");
+    const logoDataUrl = `data:image/png;base64,${logoBase64}`;
+
     // Generate PDF buffer
     const pdfBuffer = await renderToBuffer(
       <CertificatePDF
@@ -70,6 +67,7 @@ export async function POST(req: NextRequest) {
         eventName={eventName}
         date={date}
         volunteerHours={volunteerHours}
+        logoBase64={logoDataUrl}
       />
     );
 
