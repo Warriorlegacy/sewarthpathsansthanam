@@ -93,11 +93,12 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
                       <Typography variant="h5" fontWeight={800} sx={{ color }}>{value}</Typography>
                     </Box>
                   </Stack>
-                </Paper>
-          </Grid>
+                  </Paper>
+                </Grid>
+              ))}
 
-          {/* Download All Forms Card */}
-          <Grid item xs={12}>
+              {/* Download All Forms Card */}
+              <Grid item xs={12}>
             <Paper
               elevation={0}
               sx={{
@@ -169,7 +170,6 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
               </Button>
             </Paper>
           </Grid>
-            ))}
           </Grid>
 
           <Grid container spacing={4}>
