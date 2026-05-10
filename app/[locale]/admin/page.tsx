@@ -22,7 +22,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import MailIcon from "@mui/icons-material/Mail";
-import DownloadsIcon from "@mui/icons-material/Downloads";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import Button from "@mui/material/Button";
 
 export default async function AdminPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -62,7 +62,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
   const stats = [
     { label: "Volunteers Applied", value: volunteerCount ?? 0, icon: <PeopleIcon />, color: "#2D6A4F" },
     { label: "Active Members", value: memberCount ?? 0, icon: <CardMembershipIcon />, color: "#E07B39" },
-    { label: "Total Donated", value: `₹${totalDonated.toLocaleString("en-IN")}`, icon: <VolunteerActivismIcon />, color: "#C9920C" },
+    { label: "Total Donated", value: `₹${totalDonated.toLocaleString("en-IN")}`, icon: <FileDownloadIcon />, color: "#C9920C" },
     { label: "Unread Messages", value: messageCount ?? 0, icon: <MailIcon />, color: "#1565C0" },
   ];
 

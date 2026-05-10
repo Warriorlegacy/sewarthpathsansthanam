@@ -1,7 +1,28 @@
 import { Resend } from 'resend';
 import { groq } from './groq';
 
-export const resend = new Resend(process.env.RESEND_API_KEY);
+export async function sendWelcomeEmail({ email, name }: { email: string; name: string }) {
+  return resend.emails.send({
+    from: 'Sewarth Path Sansthanam <onboarding@resend.dev>',
+    to: email,
+    subject: 'Welcome to Sewarth Path Sansthanam',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px;">
+        <div style="text-align: center; border-bottom: 4px solid #FF9933; padding-bottom: 20px; margin-bottom: 20px;">
+          <h1 style="color: #FF9933; margin: 0;">Sewarth Path Sansthanam</h1>
+          <p style="color: #138808; font-weight: bold; margin: 5px 0 0 0;">Serving Humanity with Love</p>
+        </div>
+        <p>Dear ${name},</p>
+        <p>Welcome to the Sewarth Path Sansthanam community! We are thrilled to have you with us.</p>
+        <p>Your commitment to serving humanity is inspiring. We look forward to your contribution in making the world a better place.</p>
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #888; font-size: 0.8em;">
+          <p>&copy; ${new Date().getFullYear()} Sewarth Path Sansthanam. All rights reserved.</p>
+        </div>
+      </div>
+    `,
+  });
+}
+
 
 async function generateAIThanks(name: string, amount: string | number, purpose?: string) {
   try {
