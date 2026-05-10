@@ -28,36 +28,43 @@ const planLabels: Record<
 export default async function VerifyPage({ params }: Props) {
   const supabase = await createServiceClient();
 
-  const { data: membership } = await supabase
-    .from("memberships")
-    .select(`
-      id,
-      status,
-      plan_code,
-      created_at,
-      expires_at,
-      public_member_id,
-      profiles (
-        full_name,
-        email,
-        city,
-        state
-      )
-    `)
-    .eq("public_member_id", params.public_member_id)
-    .maybeSingle();
+   const { data: membership } = await supabase
+     .from("memberships")
+     .select(`
+       id,
+       status,
+       plan_code,
+       created_at,
+       expires_at,
+       public_member_id,
+       profiles (
+         full_name,
+         email,
+         city,
+         state
+       )
+     `)
+     .eq("public_member_id", params.public_member_id)
+     .maybeSingle();
 
-  return (
-    <>
-      <Navbar />
-      <main>
-        <ClientWrapper
-          params={params}
-          membership={membership}
-          planLabels={planLabels[params.locale] || planLabels.en}
-        />
-      </main>
-      <Footer />
-    </>
-  );
+   const normalizedMembership = membership
+     ? {
+         ...membership,
+         profiles: membership.profiles?.[0] || null,
+       }
+     : null;
+
+   return (
+     <>
+       <Navbar />
+       <main>
+         <ClientWrapper
+           params={params}
+           membership={normalizedMembership}
+           planLabels={planLabels[params.locale] || planLabels.en}
+         />
+       </main>
+       <Footer />
+     </>
+   );
 }
