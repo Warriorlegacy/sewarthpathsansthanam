@@ -1,8 +1,8 @@
-// File: D:\sewarthpathsansthanam\repo_temp\app\api\certificates\generate\route.tsx
-import * as entry from '../../../../../../app/api/certificates/generate/route.js'
+// File: D:\sewarthpathsansthanam\repo_temp\app\api\admin\download-forms\route.ts
+import * as entry from '../../../../../../app/api/admin/download-forms/route.js'
 import type { NextRequest } from 'next/server.js'
 
-type TEntry = typeof import('../../../../../../app/api/certificates/generate/route.js')
+type TEntry = typeof import('../../../../../../app/api/admin/download-forms/route.js')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{
