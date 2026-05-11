@@ -50,7 +50,9 @@ export default function LoginPage() {
       if (error) {
         setError(error.message)
       } else {
-        router.push("/dashboard")
+        // Check if user is admin and redirect accordingly
+        const { data: profile } = await supabase.from("profiles").select("role").eq("id", (await supabase.auth.getUser()).data.user?.id).maybeSingle();
+        router.push(profile?.role === "admin" ? "/admin" : "/dashboard")
         router.refresh()
       }
     } catch {
