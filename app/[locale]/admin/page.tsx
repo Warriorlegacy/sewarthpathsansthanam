@@ -46,7 +46,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
     console.error("Fetch profile failed:", e);
   }
 
-  if (!profile || profile.role !== "admin") redirect(`/${locale}/dashboard`);
+  if (!profile || (profile.role !== "admin" && profile.role !== "technical_head")) redirect(`/${locale}/dashboard`);
 
   // Safe Defaults
   let volunteerCount = 0;

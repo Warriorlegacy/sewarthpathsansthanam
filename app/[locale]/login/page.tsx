@@ -50,9 +50,9 @@ export default function LoginPage() {
       if (error) {
         setError(error.message)
       } else {
-        // Check if user is admin and redirect accordingly
+        // Check if user is admin/technical_head and redirect accordingly
         const { data: profile } = await supabase.from("profiles").select("role").eq("id", (await supabase.auth.getUser()).data.user?.id).maybeSingle();
-        router.push(profile?.role === "admin" ? "/admin" : "/dashboard")
+        router.push((profile?.role === "admin" || profile?.role === "technical_head") ? "/admin" : "/dashboard")
         router.refresh()
       }
     } catch {
