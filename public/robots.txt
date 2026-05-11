@@ -1,0 +1,58 @@
+# Sewarth Path Sansthanam - robots.txt
+# https://sewarthpathsansthanam.org/robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://sewarthpathsansthanam.org/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Disallow admin and private pages
+Disallow: /api/
+Disallow: /en/admin/
+Disallow: /hi/admin/
+Disallow: /en/dashboard/
+Disallow: /hi/dashboard/
+Disallow: /*.json$
+Disallow: /*.js$
+Disallow: /*.css$
+
+# Allow search engines to see the main content
+Allow: /en
+Allow: /hi
+Allow: /en/about
+Allow: /hi/about
+Allow: /en/programs
+Allow: /hi/programs
+Allow: /en/events
+Allow: /hi/events
+Allow: /en/stories
+Allow: /hi/stories
+Allow: /en/membership
+Allow: /hi/membership
+Allow: /en/volunteer
+Allow: /hi/volunteer
+Allow: /en/donate
+Allow: /hi/donate
+Allow: /en/contact
+Allow: /hi/contact
+Allow: /en/forms
+Allow: /hi/forms
+Allow: /en/verify/
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing-specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Other search engines
+User-agent: *
+Allow: /

@@ -1,0 +1,60 @@
+{
+  "name": "Sewarth Path Sansthanam",
+  "short_name": "SPS",
+  "description": "एको अहं द्वितीयो नास्ति — I am One, There is No Second. A registered public charitable trust working for education, health, social welfare, and cultural preservation across India.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFBF5",
+  "theme_color": "#E07B39",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["nonprofit", "education", "health", "social"],
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Donate Now",
+      "short_name": "Donate",
+      "description": "Make a donation to Sewarth Path Sansthanam",
+      "url": "/en/donate",
+      "icons": [{ "src": "/images/logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Become a Member",
+      "short_name": "Member",
+      "description": "Apply for membership",
+      "url": "/en/membership",
+      "icons": [{ "src": "/images/logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Volunteer",
+      "short_name": "Volunteer",
+      "description": "Join as a volunteer",
+      "url": "/en/volunteer",
+      "icons": [{ "src": "/images/logo.png", "sizes": "96x96" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "label": "Sewarth Path Sansthanam Homepage"
+    }
+  ],
+  "prefer_related_applications": false
+}

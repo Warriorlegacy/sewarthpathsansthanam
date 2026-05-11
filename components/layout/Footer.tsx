@@ -85,11 +85,32 @@ export default function Footer() {
               sx={{
                 fontFamily: "'Noto Sans Devanagari', sans-serif",
                 color: "#C9920C",
-                mb: 1,
+                mb: 0.5,
                 fontStyle: "italic",
               }}
             >
-              "{t("tagline")}"
+              "एको अहं द्वितीयो नास्ति"
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{
+                color: "#888",
+                fontStyle: "italic",
+              }}
+            >
+              (I am One, There is No Second)
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{
+                fontFamily: "'Noto Sans Devanagari', sans-serif",
+                color: "#E07B39",
+                fontWeight: 600,
+                mt: 1,
+                display: "block",
+              }}
+            >
+              सेवा परमो धर्म: Service is the Highest Dharma
             </Typography>
             <Stack spacing={1} sx={{ mt: 2 }}>
               <Stack direction="row" spacing={1} alignItems="flex-start">

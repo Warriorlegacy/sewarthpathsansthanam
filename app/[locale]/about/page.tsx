@@ -45,6 +45,17 @@ export default function AboutPage() {
             <Typography variant="h4" sx={{ color: "rgba(255,255,255,0.8)", fontWeight: 400 }}>
               About Sewarth Path Sansthanam
             </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                color: "#C9920C",
+                fontWeight: 600,
+                mt: 2,
+                fontStyle: "italic",
+              }}
+            >
+              सेवा परमो धर्म: Service is the Highest Dharma
+            </Typography>
           </Container>
         </Box>
 
