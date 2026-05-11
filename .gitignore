@@ -30,3 +30,7 @@ dist-ssr
 .next/cache
 .next/server
 .next/static
+
+# MCP Config (contains secrets)
+.mcp.json
+.mcp.local.json
