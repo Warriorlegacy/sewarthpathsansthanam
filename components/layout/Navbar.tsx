@@ -97,8 +97,7 @@ export default function Navbar() {
                     variant="caption"
                     sx={{ color: "secondary.main", lineHeight: 1.1, fontSize: "0.65rem", fontWeight: 600, display: "block", mt: 0.2 }}
                   >
-                    एकोहं द्वितीयो नास्ति
-                  </Typography>
+                                      </Typography>
                 </Box>
               </Stack>
             </Link>

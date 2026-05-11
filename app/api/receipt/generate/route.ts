@@ -236,7 +236,7 @@ export async function POST(req: NextRequest) {
       <div class="footer-left">
         ${logoBase64 ? `<div class="footer-logo"><img src="data:image/png;base64,${logoBase64}" alt="Logo"></div>` : ''}
         <div class="footer-text">
-          <strong>सेवा परमो धर्म</strong><br>
+          <strong>एको अहं द्वितीयो नास्ति</strong><br>
           Service is the Highest Dharma<br>
           www.sewarthpathsansthanam.org
         </div>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   keywords: "NGO, Varanasi, charity, seva, volunteer, donate, सेवार्थ",
   openGraph: {
     title: "Sewarth Path Sansthanam",
-    description: "सेवा परमो धर्म — Service is the Highest Dharma",
+    description: "एको अहं द्वितीयो नास्ति — I am One, There is No Second",
     url: "https://sewarthpathsansthanam.org",
     siteName: "Sewarth Path Sansthanam",
     locale: "hi_IN",

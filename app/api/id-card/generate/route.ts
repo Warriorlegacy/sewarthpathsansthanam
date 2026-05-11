@@ -220,7 +220,7 @@ export async function POST(req: NextRequest) {
       </div>
 
       <div class="card-footer" style="background: var(--green-dark);">
-        <span style="font-size: 10px;">सेवा परमो धर्म</span>
+        <span style="font-size: 10px;">एको अहं द्वितीयो नास्ति</span>
         <span style="font-size: 9px;">Reg: 202200996052093</span>
       </div>
     </div>
