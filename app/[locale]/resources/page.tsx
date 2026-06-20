@@ -8,12 +8,17 @@ import {
   Typography,
   Card,
   CardContent,
-  CardMedia,
   Button,
   Tabs,
   Tab,
   Alert,
   Snackbar,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Divider,
+  Stack,
 } from "@mui/material";
 import DescriptionIcon from "@mui/icons-material/Description";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
@@ -81,9 +86,14 @@ export default function ResourcesPage() {
   const locale = useLocale();
   const [activeTab, setActiveTab] = useState(0);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [bankDialogOpen, setBankDialogOpen] = useState(false);
 
   const handleDownload = (itemKey: string) => {
-    setSnackbarOpen(true);
+    if (itemKey === "bankPassbook") {
+      setBankDialogOpen(true);
+    } else {
+      setSnackbarOpen(true);
+    }
   };
 
   const handleCloseSnackbar = () => {
@@ -163,7 +173,9 @@ export default function ResourcesPage() {
                 fontWeight: 600,
               }}
             >
-              Download
+              {itemKey === "bankPassbook" 
+                ? (locale === "hi" ? "विवरण देखें" : "View Details")
+                : "Download"}
             </Button>
           </Box>
         </Card>
@@ -251,6 +263,85 @@ export default function ResourcesPage() {
             {t("comingSoon")}
           </Alert>
         </Snackbar>
+
+        <Dialog
+          open={bankDialogOpen}
+          onClose={() => setBankDialogOpen(false)}
+          maxWidth="xs"
+          fullWidth
+          PaperProps={{
+            sx: { borderRadius: 3, p: 1 }
+          }}
+        >
+          <DialogTitle fontWeight={800} sx={{ pb: 1, color: "primary.main" }}>
+            {locale === "hi" ? "🏛️ बैंक खाता और क्यूआर कोड" : "🏛️ Bank & Payment details"}
+          </DialogTitle>
+          <DialogContent>
+            <Stack spacing={2.5} sx={{ mt: 1 }}>
+              {/* QR Code */}
+              <Box sx={{ textAlign: "center" }}>
+                <Box
+                  component="img"
+                  src="/images/payment-qr.jpg"
+                  alt="UPI QR Code"
+                  sx={{
+                    width: "100%",
+                    maxWidth: 220,
+                    height: "auto",
+                    mx: "auto",
+                    border: "1px solid rgba(0,0,0,0.1)",
+                    borderRadius: 2,
+                    p: 0.5,
+                    bgcolor: "#fff"
+                  }}
+                />
+                <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 1, fontWeight: 700 }}>
+                  UPI ID: SEWARTHPATH482@iob
+                </Typography>
+              </Box>
+
+              <Divider />
+
+              {/* Table details */}
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                {[
+                  { label: locale === "hi" ? "नाम (Account Name)" : "Account Name", value: "SEWARTH PATH SANSTHANAM" },
+                  { label: locale === "hi" ? "बैंक (Bank Name)" : "Bank Name", value: "Indian Overseas Bank (IOB)" },
+                  { label: locale === "hi" ? "खाता संख्या (A/c No.)" : "Account Number", value: "365302000000482" },
+                  { label: locale === "hi" ? "IFSC कोड" : "IFSC Code", value: "IOBA0000370" },
+                  { label: locale === "hi" ? "शाखा (Branch)" : "Branch", value: "Varanasi (Lahurabir Main Crossing)" },
+                ].map((item) => (
+                  <Box key={item.label} sx={{ display: "flex", justifyContent: "space-between", pb: 0.75, borderBottom: "1px solid rgba(0,0,0,0.04)" }}>
+                    <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>
+                      {item.label}
+                    </Typography>
+                    <Typography variant="caption" fontWeight={700} sx={{ pl: 2, textAlign: "right" }}>
+                      {item.value}
+                    </Typography>
+                  </Box>
+                ))}
+              </Box>
+
+              <Alert severity="info" icon={false} sx={{ py: 0.5 }}>
+                <Typography variant="caption" sx={{ display: "block", lineHeight: 1.4 }}>
+                  {locale === "hi"
+                    ? "सत्यापन और दान रसीद प्राप्त करने के लिए कृपया स्क्रीनशॉट व्हाट्सएप पर भेजें: +91 9454222116"
+                    : "For verification & receipt, please send payment screenshot on WhatsApp: +91 9454222116"}
+                </Typography>
+              </Alert>
+            </Stack>
+          </DialogContent>
+          <DialogActions sx={{ px: 3, pb: 2 }}>
+            <Button
+              onClick={() => setBankDialogOpen(false)}
+              variant="contained"
+              fullWidth
+              sx={{ borderRadius: 2 }}
+            >
+              {locale === "hi" ? "बंद करें" : "Close"}
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Container>
     </Box>
   );

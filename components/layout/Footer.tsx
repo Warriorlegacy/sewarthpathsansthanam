@@ -27,6 +27,7 @@ export default function Footer() {
     { label: locale === "hi" ? "कार्यक्रम" : "Programs", href: `/${locale}/programs` },
     { label: locale === "hi" ? "आयोजन" : "Events", href: `/${locale}/events` },
     { label: locale === "hi" ? "संपर्क" : "Contact", href: `/${locale}/contact` },
+    { label: locale === "hi" ? "श्रेय" : "Credits", href: `/${locale}/credits` },
   ];
 
   const involvedLinks = [

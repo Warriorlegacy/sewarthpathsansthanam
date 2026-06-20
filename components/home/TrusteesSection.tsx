@@ -11,7 +11,28 @@ import {
 } from "@mui/material";
 import { useLocale } from "next-intl";
 
-const trustees = [
+interface TrusteeLink {
+  url: string;
+  text: string;
+  textHi: string;
+}
+
+interface Trustee {
+  name: string;
+  nameHi: string;
+  designation: string;
+  designationHi: string;
+  location: string;
+  initials: string;
+  primary?: boolean;
+  link?: string;
+  linkText?: string;
+  linkTextHi?: string;
+  links?: TrusteeLink[];
+  image?: string;
+}
+
+const trustees: Trustee[] = [
   {
     name: "Shri Mahesh Kumar Pandey",
     nameHi: "श्री महेश कुमार पाण्डेय",
@@ -28,9 +49,18 @@ const trustees = [
     designationHi: "तकनीकी प्रमुख",
     location: "Varanasi, UP",
     initials: "PRS",
-    link: "https://signhify.vercel.app/",
-    linkText: "Founder of Signhify Agency",
-    linkTextHi: "सिग्निफाई एजेंसी के संस्थापक",
+    links: [
+      {
+        url: "https://signhify.lovable.app",
+        text: "Founder of Signhify Studio",
+        textHi: "सिग्निफाई स्टूडियो के संस्थापक",
+      },
+      {
+        url: "https://signhify-ai-web.vercel.app/",
+        text: "Founder of Signhify AI",
+        textHi: "सिग्निफाई एआई के संस्थापक",
+      }
+    ],
     image: "/images/piyush-profile.jpg",
   },
   {
@@ -160,6 +190,28 @@ export default function TrusteesSection() {
                           {locale === "hi" ? trustee.linkTextHi : trustee.linkText}
                         </Typography>
                       )}
+                      {trustee.links && trustee.links.map((lnk, idx) => (
+                        <Typography
+                          key={idx}
+                          component="a"
+                          href={lnk.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          variant="caption"
+                          sx={{
+                            color: "primary.main",
+                            textDecoration: "underline",
+                            display: "block",
+                            mt: 0.5,
+                            fontWeight: 500,
+                            "&:hover": {
+                              color: "secondary.main",
+                            },
+                          }}
+                        >
+                          {locale === "hi" ? lnk.textHi : lnk.text}
+                        </Typography>
+                      ))}
                     </Box>
                   </Stack>
                 </CardContent>
