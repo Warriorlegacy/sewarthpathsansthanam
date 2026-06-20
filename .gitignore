@@ -34,3 +34,5 @@ dist-ssr
 # MCP Config (contains secrets)
 .mcp.json
 .mcp.local.json
+node_modules/
+.env
