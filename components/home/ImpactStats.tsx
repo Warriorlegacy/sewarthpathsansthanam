@@ -359,7 +359,7 @@ export default function ImpactStats() {
                 }}
               >
                 {terminalLines.map((line, idx) => (
-                  <Box key={idx} sx={{ color: line.startsWith("$") ? "#a855f7" : line.includes("SUCCESS") ? "#52B788" : "#cbd5e1" }}>
+                    <Box key={idx} sx={{ color: line?.startsWith("$") ? "#a855f7" : line?.includes("SUCCESS") ? "#52B788" : "#cbd5e1" }}>
                     {line}
                   </Box>
                 ))}
