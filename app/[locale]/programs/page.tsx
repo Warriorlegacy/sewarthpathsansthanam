@@ -162,7 +162,7 @@ export default function ProgramsPage() {
           </Container>
         </Box>
 
-        <Box sx={{ py: 8, bgcolor: "#FFFBF5" }}>
+        <Box sx={{ py: 8, bgcolor: "transparent" }}>
           <Container maxWidth="lg">
             <Grid container spacing={3}>
               {programs.map((program, i) => (

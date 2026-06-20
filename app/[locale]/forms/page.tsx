@@ -66,7 +66,7 @@ export default function FormsPage() {
   return (
     <>
       <Navbar />
-      <Box sx={{ bgcolor: "#FFFBF5", minHeight: "80vh", py: 6 }}>
+      <Box sx={{ bgcolor: "transparent", minHeight: "80vh", py: 6 }}>
         <Container maxWidth="lg">
           {/* Header Section */}
           <Stack spacing={2} sx={{ mb: 6, textAlign: "center" }}>

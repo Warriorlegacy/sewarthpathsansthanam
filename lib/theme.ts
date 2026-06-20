@@ -1,42 +1,41 @@
 "use client";
 import { createTheme } from "@mui/material/styles";
-import { orange, green, brown, grey } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
-    mode: "light",
+    mode: "dark",
     primary: {
-      main: "#E07B39",
+      main: "#E07B39", // Saffron
       light: "#F5A673",
       dark: "#A8541A",
-      contrastText: "#fff",
+      contrastText: "#ffffff",
     },
     secondary: {
-      main: "#2D6A4F",
-      light: "#52B788",
-      dark: "#1B4332",
-      contrastText: "#fff",
+      main: "#52B788", // Vibrant Green
+      light: "#74C69D",
+      dark: "#2D6A4F",
+      contrastText: "#ffffff",
     },
     background: {
-      default: "#FFFBF5",
-      paper: "#FFFFFF",
+      default: "#06060c",
+      paper: "rgba(15, 23, 42, 0.45)",
     },
     text: {
-      primary: "#1A1A1A",
-      secondary: "#4A4A4A",
+      primary: "#ffffff",
+      secondary: "rgba(255, 255, 255, 0.7)",
     },
   },
   typography: {
-    fontFamily: '"Roboto", "Noto Sans", "Arial", sans-serif',
-    h1: { fontWeight: 700 },
-    h2: { fontWeight: 600 },
-    h3: { fontWeight: 600 },
-    h4: { fontWeight: 600 },
-    h5: { fontWeight: 500 },
-    h6: { fontWeight: 500 },
+    fontFamily: '"Outfit", "Roboto", "Noto Sans", "Arial", sans-serif',
+    h1: { fontWeight: 800, fontFamily: '"Outfit", sans-serif' },
+    h2: { fontWeight: 800, fontFamily: '"Outfit", sans-serif' },
+    h3: { fontWeight: 700, fontFamily: '"Outfit", sans-serif' },
+    h4: { fontWeight: 700, fontFamily: '"Outfit", sans-serif' },
+    h5: { fontWeight: 600, fontFamily: '"Outfit", sans-serif' },
+    h6: { fontWeight: 600, fontFamily: '"Outfit", sans-serif' },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 16,
   },
   components: {
     MuiButton: {
@@ -44,14 +43,37 @@ const theme = createTheme({
         root: {
           textTransform: "none",
           fontWeight: 600,
-          borderRadius: 8,
-          padding: "10px 24px",
+          borderRadius: 30, // Premium rounded pill shape
+          padding: "12px 28px",
           fontSize: "0.95rem",
+          transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
         },
         containedPrimary: {
-          background: "linear-gradient(135deg, #E07B39 0%, #C9920C 100%)",
+          background: "linear-gradient(135deg, #E07B39 0%, #a855f7 100%)",
+          boxShadow: "0 4px 20px rgba(168, 85, 247, 0.3)",
+          color: "#fff",
           "&:hover": {
-            background: "linear-gradient(135deg, #C9920C 0%, #E07B39 100%)",
+            background: "linear-gradient(135deg, #a855f7 0%, #E07B39 100%)",
+            boxShadow: "0 6px 24px rgba(168, 85, 247, 0.5)",
+            transform: "translateY(-2px)",
+          },
+        },
+        outlinedPrimary: {
+          borderColor: "rgba(224, 123, 57, 0.5)",
+          color: "#E07B39",
+          "&:hover": {
+            borderColor: "#E07B39",
+            background: "rgba(224, 123, 57, 0.1)",
+            transform: "translateY(-2px)",
+          },
+        },
+        outlinedSecondary: {
+          borderColor: "rgba(82, 183, 136, 0.5)",
+          color: "#52B788",
+          "&:hover": {
+            borderColor: "#52B788",
+            background: "rgba(82, 183, 136, 0.1)",
+            transform: "translateY(-2px)",
           },
         },
       },
@@ -59,22 +81,42 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          boxShadow: "0 2px 16px rgba(0,0,0,0.08)",
-          borderRadius: 12,
+          background: "rgba(15, 23, 42, 0.45) !important",
+          backdropFilter: "blur(12px) saturate(180%)",
+          border: "1px solid rgba(255, 255, 255, 0.08)",
+          boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+          borderRadius: 16,
+          color: "#ffffff",
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          background: "rgba(15, 23, 42, 0.6) !important",
+          backdropFilter: "blur(12px) saturate(180%)",
+          border: "1px solid rgba(255, 255, 255, 0.08)",
+          boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+          borderRadius: 16,
+          color: "#ffffff",
         },
       },
     },
     MuiChip: {
       styleOverrides: {
         root: {
-          fontWeight: 500,
+          fontWeight: 600,
+          borderRadius: 8,
         },
       },
     },
     MuiAppBar: {
       styleOverrides: {
         root: {
-          boxShadow: "0 1px 8px rgba(0,0,0,0.1)",
+          background: "rgba(6, 6, 12, 0.75) !important",
+          backdropFilter: "blur(16px) saturate(180%)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+          boxShadow: "none",
         },
       },
     },

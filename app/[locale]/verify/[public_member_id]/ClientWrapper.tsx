@@ -140,7 +140,7 @@ export default function ClientWrapper({
     <Box
       sx={{
         py: { xs: 4, md: 8 },
-        bgcolor: "#FFFBF5",
+        bgcolor: "transparent",
         minHeight: "70vh",
       }}
     >

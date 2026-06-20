@@ -184,7 +184,7 @@ export default function ResourcesPage() {
   };
 
   return (
-    <Box sx={{ py: 6, bgcolor: "#FFFBF5", minHeight: "100vh" }}>
+    <Box sx={{ py: 6, bgcolor: "transparent", minHeight: "100vh" }}>
       <Container maxWidth="lg">
         <Box sx={{ textAlign: "center", mb: 5 }}>
           <Typography

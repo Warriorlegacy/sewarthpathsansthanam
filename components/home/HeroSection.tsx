@@ -1,4 +1,5 @@
 "use client";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Box,
   Container,
@@ -7,9 +8,7 @@ import {
   Stack,
   Chip,
 } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import GroupIcon from "@mui/icons-material/Group";
-import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import { Heart, Users, HeartHandshake, Sparkles } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 
@@ -17,209 +16,338 @@ export default function HeroSection() {
   const t = useTranslations("hero");
   const locale = useLocale();
 
+  // 3D Card Hover Tilt Effect
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0 });
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const box = card.getBoundingClientRect();
+    const x = e.clientX - box.left - box.width / 2;
+    const y = e.clientY - box.top - box.height / 2;
+    const rx = -(y / (box.height / 2)) * 10;
+    const ry = (x / (box.width / 2)) * 10;
+    setTilt({ rx, ry });
+  };
+  const handleMouseLeave = () => {
+    setTilt({ rx: 0, ry: 0 });
+  };
+
+  // Magnetic Button States
+  const [m1, setM1] = useState({ x: 0, y: 0 });
+  const [m2, setM2] = useState({ x: 0, y: 0 });
+  const [m3, setM3] = useState({ x: 0, y: 0 });
+
+  const handleMagnetic = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    setM: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>
+  ) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    setM({ x: x * 0.35, y: y * 0.35 });
+  };
+
+  // Typewriter effect for Sanskrit Motto
+  const mottoText = t("tagline");
+  const [motto, setMotto] = useState("");
+  useEffect(() => {
+    let index = 0;
+    setMotto("");
+    const interval = setInterval(() => {
+      if (index < mottoText.length) {
+        setMotto((prev) => prev + mottoText.charAt(index));
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 120);
+    return () => clearInterval(interval);
+  }, [mottoText]);
+
+  // Particles Configuration
+  const [particles, setParticles] = useState<Array<{ id: number; left: number; delay: number; size: number; drift: number }>>([]);
+  useEffect(() => {
+    const generated = Array.from({ length: 25 }).map((_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      delay: Math.random() * 6,
+      size: Math.random() * 5 + 2,
+      drift: Math.random() * 80 - 40,
+    }));
+    setParticles(generated);
+  }, []);
+
   return (
     <Box
       sx={{
         position: "relative",
-        minHeight: { xs: "92vh", md: "88vh" },
+        minHeight: { xs: "92vh", md: "90vh" },
         display: "flex",
         alignItems: "center",
-        background:
-          "linear-gradient(135deg, #3D1A0A 0%, #6B3A1F 30%, #2D6A4F 70%, #1B4332 100%)",
+        justifyContent: "center",
+        py: { xs: 8, md: 4 },
         overflow: "hidden",
       }}
     >
-      {/* Background pattern */}
-      <Box
-        sx={{
-          position: "absolute",
-          inset: 0,
-          opacity: 0.05,
-          backgroundImage: `radial-gradient(circle at 25% 25%, #E07B39 0%, transparent 50%),
-            radial-gradient(circle at 75% 75%, #C9920C 0%, transparent 50%)`,
-        }}
-      />
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes floatUp {
+          0% { transform: translateY(0) translateX(0); opacity: 0; }
+          10% { opacity: 0.7; }
+          90% { opacity: 0.7; }
+          100% { transform: translateY(-80vh) translateX(var(--drift)); opacity: 0; }
+        }
+      `}} />
 
-      {/* Decorative circles */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: -100,
-          right: -100,
-          width: 400,
-          height: 400,
-          borderRadius: "50%",
-          border: "2px solid rgba(224, 123, 57, 0.2)",
-          display: { xs: "none", md: "block" },
-        }}
-      />
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: -150,
-          left: -150,
-          width: 500,
-          height: 500,
-          borderRadius: "50%",
-          border: "2px solid rgba(45, 106, 79, 0.3)",
-          display: { xs: "none", md: "block" },
-        }}
-      />
+      {/* Floating Particles Backdrop */}
+      {particles.map((p) => (
+        <Box
+          key={p.id}
+          sx={{
+            position: "absolute",
+            width: p.size,
+            height: p.size,
+            borderRadius: "50%",
+            background: "rgba(224, 123, 57, 0.35)",
+            boxShadow: "0 0 10px rgba(224, 123, 57, 0.5)",
+            bottom: "-10px",
+            left: `${p.left}%`,
+            animation: `floatUp 9s infinite linear`,
+            animationDelay: `${p.delay}s`,
+            "--drift": `${p.drift}px`,
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+      ))}
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
-        <Box sx={{ maxWidth: 720, py: { xs: 8, md: 4 } }}>
+        <Box
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          sx={{
+            maxWidth: 820,
+            mx: "auto",
+            p: { xs: 4, sm: 6, md: 8 },
+            borderRadius: "24px",
+            background: "rgba(15, 23, 42, 0.45)",
+            backdropFilter: "blur(16px) saturate(180%)",
+            border: "1px solid rgba(255, 255, 255, 0.08)",
+            boxShadow: "0 12px 40px 0 rgba(0, 0, 0, 0.45)",
+            transform: `perspective(1000px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
+            transition: "transform 0.15s ease-out, border 0.3s, box-shadow 0.3s",
+            "&:hover": {
+              borderColor: "rgba(255, 255, 255, 0.15)",
+              boxShadow: "0 16px 50px 0 rgba(168, 85, 247, 0.15)",
+            },
+          }}
+        >
           {/* Registration badge */}
           <Chip
+            icon={<Sparkles size={14} className="text-orange-500" />}
             label={t("regText")}
             size="small"
             sx={{
-              mb: 3,
-              bgcolor: "rgba(224, 123, 57, 0.15)",
+              mb: 4,
+              bgcolor: "rgba(224, 123, 57, 0.1)",
               color: "#F5A673",
-              border: "1px solid rgba(224, 123, 57, 0.3)",
-              fontSize: { xs: "0.65rem", sm: "0.7rem" },
+              border: "1px solid rgba(224, 123, 57, 0.2)",
+              fontSize: { xs: "0.7rem", sm: "0.75rem" },
               height: "auto",
-              py: 0.5,
+              py: 0.6,
+              px: 1.5,
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
               "& .MuiChip-label": { whiteSpace: "normal", lineHeight: 1.4 },
             }}
           />
 
-          {/* Hindi name */}
+          {/* Hindi Name */}
           <Typography
-            variant="h2"
+            variant="h1"
             sx={{
               fontFamily: "'Noto Sans Devanagari', sans-serif",
-              fontWeight: 700,
+              fontWeight: 800,
               color: "#E07B39",
-              mb: 1,
-              fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
-              lineHeight: 1.3,
+              mb: 1.5,
+              fontSize: { xs: "2.2rem", sm: "3.2rem", md: "3.8rem" },
+              lineHeight: 1.2,
+              letterSpacing: "-0.01em",
+              textShadow: "0 0 20px rgba(224, 123, 57, 0.35)",
             }}
           >
             {t("ngoNameHi")}
           </Typography>
 
-          {/* English name */}
+          {/* English Subtitle */}
           <Typography
             variant="h4"
             sx={{
-              color: "rgba(255,255,255,0.7)",
-              mb: 3,
-              fontWeight: 400,
+              color: "rgba(255, 255, 255, 0.7)",
+              mb: 4,
+              fontWeight: 500,
               fontSize: { xs: "1.1rem", md: "1.4rem" },
               letterSpacing: "0.05em",
+              textTransform: "uppercase",
             }}
           >
             {t("ngoNameEn")}
           </Typography>
 
-          {/* Motto */}
+          {/* Slogan with Typewriter Effect */}
           <Box
             sx={{
-              display: "inline-block",
+              display: "inline-flex",
+              flexDirection: "column",
               borderLeft: "4px solid #C9920C",
-              pl: 2,
-              mb: 3,
+              pl: 3,
+              mb: 4,
+              textAlign: "left",
             }}
           >
             <Typography
               variant="h3"
               sx={{
                 fontFamily: "'Noto Sans Devanagari', sans-serif",
-                fontWeight: 700,
+                fontWeight: 800,
                 color: "#C9920C",
-                fontSize: { xs: "1.5rem", sm: "2rem", md: "2.4rem" },
+                fontSize: { xs: "1.6rem", sm: "2.2rem", md: "2.6rem" },
                 lineHeight: 1.2,
+                minHeight: "1.2em", // Avoid layout shift during typing
+                textShadow: "0 0 15px rgba(201, 146, 12, 0.3)",
               }}
             >
-              {t("tagline")}
+              {motto}
+              <Box
+                component="span"
+                sx={{
+                  display: "inline-block",
+                  width: "2px",
+                  height: "0.8em",
+                  bgcolor: "#C9920C",
+                  ml: 0.5,
+                  animation: "blink 1s step-end infinite",
+                  "@keyframes blink": {
+                    "50%": { opacity: 0 },
+                  },
+                }}
+              />
             </Typography>
             <Typography
               variant="subtitle1"
-              sx={{ color: "rgba(255,255,255,0.6)", mt: 0.5, fontStyle: "italic" }}
+              sx={{
+                color: "rgba(255,255,255,0.55)",
+                mt: 0.5,
+                fontWeight: 500,
+                fontStyle: "italic",
+                letterSpacing: "0.02em",
+              }}
             >
               {t("taglineEn")}
             </Typography>
           </Box>
 
-          {/* Mission statement */}
+          {/* Mission Description */}
           <Typography
             variant="body1"
             sx={{
-              color: "rgba(255,255,255,0.8)",
-              mb: 4,
-              maxWidth: 600,
+              color: "rgba(255, 255, 255, 0.75)",
+              mb: 5,
+              maxWidth: 680,
               lineHeight: 1.8,
-              fontSize: { xs: "0.95rem", md: "1.05rem" },
+              fontSize: { xs: "1rem", md: "1.1rem" },
+              fontWeight: 400,
             }}
           >
             {t("subtitle")}
           </Typography>
 
-          {/* CTA Buttons */}
+          {/* Magnetic CTA Buttons */}
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
-            sx={{ flexWrap: "wrap", gap: 1.5 }}
+            justifyContent="center"
+            alignItems="center"
+            sx={{ gap: 2 }}
           >
             <Button
               component={Link}
               href={`/${locale}/donate`}
+              onMouseMove={(e) => handleMagnetic(e, setM1)}
+              onMouseLeave={() => setM1({ x: 0, y: 0 })}
               variant="contained"
               size="large"
-              startIcon={<VolunteerActivismIcon />}
+              startIcon={<Heart size={18} />}
+              className="light-streak"
               sx={{
                 fontSize: { xs: "0.95rem", md: "1rem" },
-                py: 1.5,
-                px: 3.5,
-                minHeight: 52,
-                background: "linear-gradient(135deg, #E07B39 0%, #C9920C 100%)",
-                boxShadow: "0 4px 20px rgba(224, 123, 57, 0.5)",
+                py: 1.8,
+                px: 4,
+                minHeight: 54,
+                background: "linear-gradient(135deg, #E07B39 0%, #a855f7 100%)",
+                boxShadow: "0 8px 30px rgba(168, 85, 247, 0.4)",
+                transform: `translate(${m1.x}px, ${m1.y}px)`,
+                transition: "transform 0.15s ease-out, box-shadow 0.3s",
                 "&:hover": {
-                  background: "linear-gradient(135deg, #C9920C 0%, #E07B39 100%)",
-                  boxShadow: "0 6px 24px rgba(224, 123, 57, 0.6)",
+                  background: "linear-gradient(135deg, #a855f7 0%, #E07B39 100%)",
+                  boxShadow: "0 12px 35px rgba(168, 85, 247, 0.6)",
                 },
               }}
             >
               {t("ctaDonate")}
             </Button>
+
             <Button
               component={Link}
               href={`/${locale}/volunteer`}
+              onMouseMove={(e) => handleMagnetic(e, setM2)}
+              onMouseLeave={() => setM2({ x: 0, y: 0 })}
               variant="outlined"
               size="large"
-              startIcon={<GroupIcon />}
+              startIcon={<Users size={18} />}
               sx={{
                 fontSize: { xs: "0.95rem", md: "1rem" },
-                py: 1.5,
-                px: 3.5,
-                minHeight: 52,
-                borderColor: "rgba(255,255,255,0.5)",
-                color: "#fff",
+                py: 1.8,
+                px: 4,
+                minHeight: 54,
+                borderColor: "rgba(255, 255, 255, 0.15)",
+                color: "#ffffff",
+                transform: `translate(${m2.x}px, ${m2.y}px)`,
+                transition: "transform 0.15s ease-out, border 0.3s, background 0.3s",
+                backdropFilter: "blur(4px)",
+                background: "rgba(255,255,255,0.03)",
                 "&:hover": {
                   borderColor: "#E07B39",
-                  bgcolor: "rgba(224, 123, 57, 0.1)",
+                  background: "rgba(224, 123, 57, 0.1)",
+                  boxShadow: "0 0 20px rgba(224, 123, 57, 0.25)",
                 },
               }}
             >
               {t("ctaVolunteer")}
             </Button>
+
             <Button
               component={Link}
               href={`/${locale}/membership`}
+              onMouseMove={(e) => handleMagnetic(e, setM3)}
+              onMouseLeave={() => setM3({ x: 0, y: 0 })}
               variant="outlined"
               size="large"
-              startIcon={<FavoriteIcon />}
+              startIcon={<HeartHandshake size={18} />}
               sx={{
                 fontSize: { xs: "0.95rem", md: "1rem" },
-                py: 1.5,
-                px: 3.5,
-                minHeight: 52,
-                borderColor: "rgba(45, 106, 79, 0.7)",
+                py: 1.8,
+                px: 4,
+                minHeight: 54,
+                borderColor: "rgba(82, 183, 136, 0.25)",
                 color: "#52B788",
+                transform: `translate(${m3.x}px, ${m3.y}px)`,
+                transition: "transform 0.15s ease-out, border 0.3s, background 0.3s",
+                backdropFilter: "blur(4px)",
+                background: "rgba(82,183,136,0.02)",
                 "&:hover": {
                   borderColor: "#52B788",
-                  bgcolor: "rgba(45, 106, 79, 0.1)",
+                  background: "rgba(82, 183, 136, 0.08)",
+                  boxShadow: "0 0 20px rgba(82, 183, 136, 0.25)",
                 },
               }}
             >
@@ -228,18 +356,6 @@ export default function HeroSection() {
           </Stack>
         </Box>
       </Container>
-
-      {/* Bottom wave */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: 60,
-          background: "linear-gradient(to top, #FFFBF5, transparent)",
-        }}
-      />
     </Box>
   );
 }

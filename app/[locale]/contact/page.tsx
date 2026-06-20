@@ -35,7 +35,7 @@ export default function ContactPage() {
           </Container>
         </Box>
 
-        <Box sx={{ py: 8, bgcolor: "#FFFBF5" }}>
+        <Box sx={{ py: 8, bgcolor: "transparent" }}>
           <Container maxWidth="lg">
             <Grid container spacing={5}>
               <Grid item xs={12} md={4}>

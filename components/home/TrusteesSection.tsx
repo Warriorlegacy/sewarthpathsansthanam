@@ -101,29 +101,50 @@ export default function TrusteesSection() {
   const locale = useLocale();
 
   return (
-    <Box sx={{ py: 8, bgcolor: "#FFF8F0" }}>
+    <Box sx={{ py: 10, position: "relative" }}>
       <Container maxWidth="lg">
+        {/* Section Header */}
         <Box sx={{ textAlign: "center", mb: 6 }}>
-          <Typography variant="h3" fontWeight={700} sx={{ mb: 1 }}>
+          <Typography
+            variant="h3"
+            fontWeight={800}
+            sx={{
+              mb: 1.5,
+              color: "#ffffff",
+              fontSize: { xs: "2rem", md: "2.6rem" },
+              letterSpacing: "-0.01em",
+            }}
+          >
             {locale === "hi" ? "हमारा नेतृत्व" : "Our Leadership"}
           </Typography>
           <hr className="section-divider" style={{ margin: "12px auto 16px" }} />
-          <Typography variant="subtitle1" color="text.secondary">
+          <Typography variant="subtitle1" sx={{ color: "rgba(255,255,255,0.7)" }}>
             {locale === "hi"
               ? "न्यास की स्थापना और संचालन करने वाले समर्पित न्यासी"
               : "Dedicated trustees who founded and guide the trust"}
           </Typography>
         </Box>
-        <Grid container spacing={3} justifyContent="center">
-          {trustees.map((trustee, i) => (
+
+        {/* Leadership Grid */}
+        <Grid container spacing={3.5} justifyContent="center">
+          {trustees.map((trustee) => (
             <Grid item xs={12} sm={6} md={4} key={trustee.name}>
               <Card
                 sx={{
                   height: "100%",
                   textAlign: "center",
-                  border: trustee.primary ? "2px solid #E07B39" : "1px solid",
-                  borderColor: trustee.primary ? "#E07B39" : "grey.100",
+                  border: trustee.primary ? "2px solid #E07B39" : "1px solid rgba(255, 255, 255, 0.08)",
+                  background: "rgba(15, 23, 42, 0.45) !important",
+                  backdropFilter: "blur(12px) saturate(180%)",
+                  borderRadius: "20px",
                   position: "relative",
+                  boxShadow: trustee.primary ? "0 0 25px rgba(224, 123, 57, 0.2)" : "0 8px 32px rgba(0, 0, 0, 0.3)",
+                  transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
+                  "&:hover": {
+                    transform: "translateY(-6px)",
+                    borderColor: trustee.primary ? "#E07B39" : "rgba(255, 255, 255, 0.2)",
+                    boxShadow: trustee.primary ? "0 12px 35px rgba(224, 123, 57, 0.35)" : "0 12px 35px rgba(255, 255, 255, 0.08)",
+                  },
                 }}
               >
                 {trustee.primary && (
@@ -138,16 +159,18 @@ export default function TrusteesSection() {
                     }}
                   />
                 )}
-                <CardContent sx={{ p: 3, pt: trustee.primary ? 3.5 : 3 }}>
-                  <Stack alignItems="center" spacing={1.5}>
+                <CardContent sx={{ p: 4, pt: trustee.primary ? 4.5 : 4 }}>
+                  <Stack alignItems="center" spacing={2}>
                     <Avatar
                       src={trustee.image}
                       sx={{
-                        width: trustee.primary ? 72 : 60,
-                        height: trustee.primary ? 72 : 60,
+                        width: trustee.primary ? 80 : 68,
+                        height: trustee.primary ? 80 : 68,
                         bgcolor: trustee.primary ? "#E07B39" : "#2D6A4F",
-                        fontSize: trustee.primary ? "1.4rem" : "1.2rem",
+                        fontSize: trustee.primary ? "1.6rem" : "1.3rem",
                         fontWeight: 700,
+                        border: `2px solid rgba(255, 255, 255, 0.1)`,
+                        boxShadow: "0 4px 15px rgba(0,0,0,0.25)",
                       }}
                     >
                       {!trustee.image && trustee.initials}
@@ -156,19 +179,21 @@ export default function TrusteesSection() {
                       <Typography
                         variant={trustee.primary ? "h6" : "subtitle1"}
                         fontWeight={700}
-                        sx={{ fontFamily: "'Noto Sans Devanagari', sans-serif", lineHeight: 1.3 }}
+                        sx={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: "#ffffff", lineHeight: 1.3 }}
                       >
                         {locale === "hi" ? trustee.nameHi : trustee.name}
                       </Typography>
                       <Typography
                         variant="caption"
-                        sx={{ color: "primary.main", fontWeight: 600, display: "block", mt: 0.5 }}
+                        sx={{ color: "primary.main", fontWeight: 700, display: "block", mt: 0.8, textTransform: "uppercase", letterSpacing: "0.05em" }}
                       >
                         {locale === "hi" ? trustee.designationHi : trustee.designation}
                       </Typography>
-                      <Typography variant="caption" color="text.secondary">
+                      <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.45)", display: "block", mt: 0.5 }}>
                         {trustee.location}
                       </Typography>
+                      
+                      {/* Interactive links */}
                       {trustee.link && (
                         <Typography
                           component="a"
@@ -177,13 +202,15 @@ export default function TrusteesSection() {
                           rel="noopener noreferrer"
                           variant="caption"
                           sx={{
-                            color: "primary.main",
-                            textDecoration: "underline",
+                            color: "#52B788",
+                            textDecoration: "none",
                             display: "block",
-                            mt: 1,
-                            fontWeight: 500,
+                            mt: 1.5,
+                            fontWeight: 600,
+                            transition: "color 0.2s",
                             "&:hover": {
-                              color: "secondary.main",
+                              color: "primary.main",
+                              textDecoration: "underline",
                             },
                           }}
                         >
@@ -199,13 +226,15 @@ export default function TrusteesSection() {
                           rel="noopener noreferrer"
                           variant="caption"
                           sx={{
-                            color: "primary.main",
-                            textDecoration: "underline",
+                            color: "#52B788",
+                            textDecoration: "none",
                             display: "block",
-                            mt: 0.5,
-                            fontWeight: 500,
+                            mt: 1,
+                            fontWeight: 600,
+                            transition: "color 0.2s",
                             "&:hover": {
-                              color: "secondary.main",
+                              color: "primary.main",
+                              textDecoration: "underline",
                             },
                           }}
                         >

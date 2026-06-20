@@ -56,7 +56,7 @@ export default async function DashboardPage({ params }: { params: Promise<{ loca
     <>
       <Navbar />
       <main>
-        <Box sx={{ bgcolor: "#FFFBF5", minHeight: "80vh", py: 6 }}>
+        <Box sx={{ bgcolor: "transparent", minHeight: "80vh", py: 6 }}>
           <Container maxWidth="lg">
             <Stack direction={{ xs: "column", sm: "row" }} spacing={2} alignItems={{ sm: "center" }} sx={{ mb: 5 }}>
               <Avatar

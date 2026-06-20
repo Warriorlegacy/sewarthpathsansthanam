@@ -34,7 +34,7 @@ export default function DonatePage() {
           </Container>
         </Box>
 
-        <Box sx={{ py: 8, bgcolor: "#FFFBF5" }}>
+        <Box sx={{ py: 8, bgcolor: "transparent" }}>
           <Container maxWidth="lg">
             <Grid container spacing={5}>
               {/* Left — why donate */}
@@ -55,7 +55,7 @@ export default function DonatePage() {
                         display: "flex",
                         gap: 2,
                         p: 2,
-                        bgcolor: "#FFF8F0",
+                        bgcolor: "transparent",
                         borderRadius: 2,
                         border: "1px solid rgba(224, 123, 57, 0.15)",
                       }}
@@ -90,7 +90,7 @@ export default function DonatePage() {
                   sx={{
                     p: 2.5,
                     mt: 3,
-                    bgcolor: "#FFF8F0",
+                    bgcolor: "transparent",
                     border: "1px solid rgba(224, 123, 57, 0.2)",
                     borderRadius: 2,
                   }}

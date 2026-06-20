@@ -91,7 +91,7 @@ export default function LoginPage() {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: "#FFFBF5",
+        backgroundColor: "transparent",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

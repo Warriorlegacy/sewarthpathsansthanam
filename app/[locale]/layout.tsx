@@ -34,6 +34,11 @@ export default async function LocaleLayout({
         <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="beforeInteractive" />
       </head>
       <body>
+        <div className="aurora-container">
+          <div className="aurora-mesh aurora-1"></div>
+          <div className="aurora-mesh aurora-2"></div>
+          <div className="aurora-mesh aurora-3"></div>
+        </div>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />

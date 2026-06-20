@@ -60,7 +60,7 @@ export default function AboutPage() {
         </Box>
 
         {/* Story */}
-        <Box sx={{ py: 8, bgcolor: "#FFFBF5" }}>
+        <Box sx={{ py: 8, bgcolor: "transparent" }}>
           <Container maxWidth="lg">
             <Grid container spacing={6} alignItems="center">
               <Grid item xs={12} md={6}>
@@ -89,7 +89,7 @@ export default function AboutPage() {
                 <Paper
                   sx={{
                     p: 4,
-                    bgcolor: "#FFF8F0",
+                    bgcolor: "transparent",
                     border: "1px solid rgba(224, 123, 57, 0.2)",
                     borderRadius: 3,
                   }}
@@ -156,7 +156,7 @@ export default function AboutPage() {
         </Box>
 
         {/* Timeline */}
-        <Box sx={{ py: 8, bgcolor: "#FFFBF5" }}>
+        <Box sx={{ py: 8, bgcolor: "transparent" }}>
           <Container maxWidth="md">
             <Typography variant="h4" fontWeight={700} align="center" sx={{ mb: 6 }}>
               हमारी यात्रा — Our Journey

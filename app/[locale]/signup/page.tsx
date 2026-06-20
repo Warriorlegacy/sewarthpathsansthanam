@@ -76,7 +76,7 @@ export default function SignupPage() {
       <Box
         sx={{
           minHeight: "100vh",
-          backgroundColor: "#FFFBF5",
+          backgroundColor: "transparent",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -123,7 +123,7 @@ export default function SignupPage() {
     <Box
       sx={{
         minHeight: "100vh",
-        backgroundColor: "#FFFBF5",
+        backgroundColor: "transparent",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

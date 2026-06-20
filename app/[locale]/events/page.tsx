@@ -151,7 +151,7 @@ export default function EventsPage() {
           </Container>
         </Box>
 
-        <Box sx={{ py: 8, bgcolor: "#FFFBF5" }}>
+        <Box sx={{ py: 8, bgcolor: "transparent" }}>
           <Container maxWidth="lg">
             <Typography variant="h4" fontWeight={700} sx={{ mb: 1 }}>
               Upcoming Events / आगामी कार्यक्रम

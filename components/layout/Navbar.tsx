@@ -55,9 +55,11 @@ export default function Navbar() {
       <AppBar
         position="sticky"
         sx={{
-          bgcolor: "rgba(255, 251, 245, 0.97)",
-          backdropFilter: "blur(8px)",
-          color: "text.primary",
+          bgcolor: "rgba(6, 6, 12, 0.4) !important",
+          backdropFilter: "blur(16px) saturate(180%)",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+          color: "#ffffff",
+          boxShadow: "none",
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between", minHeight: { xs: 64, md: 72 } }}>
@@ -177,7 +179,15 @@ export default function Navbar() {
         anchor="right"
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        PaperProps={{ sx: { width: 280, bgcolor: "background.default" } }}
+        PaperProps={{
+          sx: {
+            width: 280,
+            bgcolor: "rgba(15, 23, 42, 0.75) !important",
+            backdropFilter: "blur(20px)",
+            borderLeft: "1px solid rgba(255, 255, 255, 0.08)",
+            color: "#ffffff",
+          }
+        }}
       >
         <Box sx={{ p: 2, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Typography variant="subtitle1" fontWeight={700} color="primary">

@@ -34,7 +34,7 @@ export default function VolunteerPage() {
           </Container>
         </Box>
 
-        <Box sx={{ py: 8, bgcolor: "#FFFBF5" }}>
+        <Box sx={{ py: 8, bgcolor: "transparent" }}>
           <Container maxWidth="lg">
             <Grid container spacing={5}>
               {/* Left */}

@@ -40,7 +40,9 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        bgcolor: "#1A0A00",
+        bgcolor: "rgba(6, 6, 12, 0.6) !important",
+        backdropFilter: "blur(16px)",
+        borderTop: "1px solid rgba(255, 255, 255, 0.08)",
         color: "#f5f5f5",
         pt: 6,
         pb: 3,
@@ -186,8 +188,8 @@ export default function Footer() {
             </Typography>
             <Box
               sx={{
-                bgcolor: "rgba(224, 123, 57, 0.08)",
-                border: "1px solid rgba(224, 123, 57, 0.25)",
+                bgcolor: "rgba(255, 255, 255, 0.03)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
                 borderRadius: 2,
                 p: 2,
               }}

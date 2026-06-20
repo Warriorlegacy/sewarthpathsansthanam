@@ -84,7 +84,7 @@ export default function StoriesPage() {
           <Container maxWidth="md">
             <Typography
               variant="h2"
-              sx={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: "#FFFBF5", fontWeight: 700, mb: 1 }}
+              sx={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: "transparent", fontWeight: 700, mb: 1 }}
             >
               प्रभाव की कहानियां
             </Typography>
@@ -97,7 +97,7 @@ export default function StoriesPage() {
           </Container>
         </Box>
 
-        <Box sx={{ py: 8, bgcolor: "#FFFBF5" }}>
+        <Box sx={{ py: 8, bgcolor: "transparent" }}>
           <Container maxWidth="lg">
             <Grid container spacing={4}>
               {stories.map((story) => {

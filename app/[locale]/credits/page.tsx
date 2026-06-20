@@ -175,7 +175,7 @@ export default function CreditsPage() {
         </Box>
 
         {/* Creator Profile */}
-        <Box sx={{ py: 8, bgcolor: "#FFFBF5" }}>
+        <Box sx={{ py: 8, bgcolor: "transparent" }}>
           <Container maxWidth="lg">
             <Grid container spacing={5} alignItems="stretch">
               <Grid item xs={12} md={5}>
@@ -187,7 +187,7 @@ export default function CreditsPage() {
                     justifyContent: "space-between",
                     border: "2px solid #E07B39",
                     borderRadius: 3,
-                    bgcolor: "#FFF8F0",
+                    bgcolor: "transparent",
                     position: "relative",
                     overflow: "visible",
                   }}
@@ -343,7 +343,7 @@ export default function CreditsPage() {
         </Box>
 
         {/* Philosophy & Special Thanks */}
-        <Box sx={{ py: 8, bgcolor: "#FFF8F0", borderTop: "1px solid rgba(0,0,0,0.05)" }}>
+        <Box sx={{ py: 8, bgcolor: "transparent", borderTop: "1px solid rgba(0,0,0,0.05)" }}>
           <Container maxWidth="lg">
             <Grid container spacing={6}>
               <Grid item xs={12} md={6}>

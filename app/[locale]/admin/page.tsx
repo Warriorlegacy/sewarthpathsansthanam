@@ -127,7 +127,7 @@ export default async function AdminPage({ params }: { params: Promise<{ locale: 
   return (
     <>
       <Navbar />
-      <Box sx={{ bgcolor: "#FFFBF5", minHeight: "80vh", py: 6 }}>
+      <Box sx={{ bgcolor: "transparent", minHeight: "80vh", py: 6 }}>
         <Container maxWidth="lg">
           <Typography variant="h4" fontWeight={700} sx={{ mb: 1 }}>Admin Dashboard</Typography>
           <Typography
