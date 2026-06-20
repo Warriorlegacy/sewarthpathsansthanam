@@ -76,38 +76,3 @@ body {
   .no-print { display: none !important; }
   .print-only { display: block !important; }
 }
-
-/* Glassmorphism helpers */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
-.glass-panel-light {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-}
-
-.text-gradient-neon {
-  background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #10b981 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.glow-purple {
-  box-shadow: 0 0 40px rgba(168, 85, 247, 0.25);
-}
-
-.glow-emerald {
-  box-shadow: 0 0 40px rgba(16, 185, 129, 0.25);
-}
-
-.glow-pink {
-  box-shadow: 0 0 40px rgba(236, 72, 153, 0.25);
-}
