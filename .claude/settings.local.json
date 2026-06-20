@@ -77,7 +77,7 @@
       "Bash(npm run *)",
       "Bash(curl -s -X PATCH 'https://ebqevmoybuohieipapts.supabase.co/rest/v1/profiles?id=eq.67fb71f7-c525-4b02-a578-d27af61c5ad1' -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVicWV2bW95YnVvaGllaXBhcHRzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODIzOTA5MiwiZXhwIjoyMDkzODE1MDkyfQ.lHDTdPa1qKtMTxtA8Vae70bIYCMq04Nqf6uu1wETO74' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVicWV2bW95YnVvaGllaXBhcHRzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODIzOTA5MiwiZXhwIjoyMDkzODE1MDkyfQ.lHDTdPa1qKtMTxtA8Vae70bIYCMq04Nqf6uu1wETO74' -H 'Content-Type: application/json' -H 'Prefer: return=representation' -d '{ *)",
       "Bash(git commit -m 'Update admin login to support technical_head role *)",
-      "Bash(sed -i 's/सेवा परमो धर्म/एको अहं द्वितीयो नास्ति/g' public/forms/certificate_template.html)",
+      "Bash(sed -i 's/सेवा परमो धर्म/एकोऽहं द्वितीयः नास्ति/g' public/forms/certificate_template.html)",
       "Bash(grep -l \"सेवा परमो\" public/forms/*.html)",
       "Bash(curl -s -I https://sewarthpathsansthanam.vercel.app/sitemap.xml)",
       "Bash(git commit -m 'Fix sitemap and robots.txt for Next.js *)"

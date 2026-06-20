@@ -92,7 +92,7 @@ export default function Footer() {
                 fontStyle: "italic",
               }}
             >
-              "एको अहं द्वितीयो नास्ति"
+              "एकोऽहं द्वितीयः नास्ति"
             </Typography>
             <Typography
               variant="caption"

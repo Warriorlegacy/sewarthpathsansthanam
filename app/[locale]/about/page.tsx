@@ -79,7 +79,7 @@ export default function AboutPage() {
                     color: "text.secondary",
                   }}
                 >
-                  'एको अहं द्वितीयो नास्ति' के शाश्वत दर्शन से प्रेरित यह संगठन शिक्षा, स्वास्थ्य, सांस्कृतिक संरक्षण और सामाजिक कल्याण के क्षेत्र में अथक कार्य करता है।
+                  'एकोऽहं द्वितीयः नास्ति' के शाश्वत दर्शन से प्रेरित यह संगठन शिक्षा, स्वास्थ्य, सांस्कृतिक संरक्षण और सामाजिक कल्याण के क्षेत्र में अथक कार्य करता है।
                 </Typography>
                 <Typography variant="body1" sx={{ lineHeight: 1.9, color: "text.secondary" }}>
                   The trust is explicitly secular and inclusive, working for the welfare of all communities — Hindus, Muslims, Sikhs, Jains, Buddhists, and Christians alike — across the entirety of India (सम्पूर्ण भारत).

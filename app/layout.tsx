@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     default: "Sewarth Path Sansthanam | सेवार्थ पथ संस्थानम्",
     template: "%s | Sewarth Path Sansthanam",
   },
-  description: "एको अहं द्वितीयो नास्ति — I am One, There is No Second. A registered public charitable trust working for education, health, social welfare, and cultural preservation across India. सेवा परमो धर्म: Service is the Highest Dharma.",
+  description: "एकोऽहं द्वितीयः नास्ति — I am One, There is No Second. A registered public charitable trust working for education, health, social welfare, and cultural preservation across India. सेवा परमो धर्म: Service is the Highest Dharma.",
   keywords: [
     "NGO India",
     "charity trust India",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     url: "https://sewarthpathsansthanam.org",
     siteName: "Sewarth Path Sansthanam",
     title: "Sewarth Path Sansthanam | सेवार्थ पथ संस्थानम्",
-    description: "एको अहं द्वितीयो नास्ति — I am One, There is No Second. A registered public charitable trust working for education, health, social welfare, and cultural preservation across India.",
+    description: "एकोऽहं द्वितीयः नास्ति — I am One, There is No Second. A registered public charitable trust working for education, health, social welfare, and cultural preservation across India.",
     images: [
       {
         url: "/images/logo.png",
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Sewarth Path Sansthanam | सेवार्थ पथ संस्थानम्",
-    description: "एको अहं द्वितीयो नास्ति — Service is the Highest Dharma. Join us in serving humanity across India.",
+    description: "एकोऽहं द्वितीयः नास्ति — Service is the Highest Dharma. Join us in serving humanity across India.",
     images: ["/images/logo.png"],
     creator: "@sewarthpathsansthanam",
     site: "@sewarthpathsansthanam",
