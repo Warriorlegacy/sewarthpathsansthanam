@@ -206,6 +206,8 @@ export default function HeroSection() {
           >
             <Typography
               variant="h3"
+              translate="no"
+              className="notranslate"
               sx={{
                 fontFamily: "'Noto Sans Devanagari', sans-serif",
                 fontWeight: 800,
