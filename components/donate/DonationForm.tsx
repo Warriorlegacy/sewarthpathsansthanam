@@ -325,8 +325,8 @@ export default function DonationForm() {
               </Typography>
               <Box
                 sx={{
-                  bgcolor: "#FFF8F0",
-                  border: "1px solid rgba(224, 123, 57, 0.15)",
+                  bgcolor: "rgba(224, 123, 57, 0.08)",
+                  border: "1px solid rgba(224, 123, 57, 0.25)",
                   borderRadius: 2,
                   p: 2,
                   display: "flex",
@@ -342,7 +342,7 @@ export default function DonationForm() {
                   { label: locale === "hi" ? "शाखा (Branch)" : "Branch", value: "Varanasi (Lahurabir Main Crossing)" },
                   { label: locale === "hi" ? "खाता प्रकार (A/c Type)" : "Account Type", value: locale === "hi" ? "करंट / ट्रस्ट खाता" : "Current / Trust Account" },
                 ].map((item) => (
-                  <Box key={item.label} sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", borderBottom: "1px solid rgba(0,0,0,0.04)", pb: 1, "&:last-child": { borderBottom: "none", pb: 0 } }}>
+                  <Box key={item.label} sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", borderBottom: "1px solid rgba(255, 255, 255, 0.08)", pb: 1, "&:last-child": { borderBottom: "none", pb: 0 } }}>
                     <Typography variant="caption" color="text.secondary" sx={{ fontWeight: 600 }}>
                       {item.label}
                     </Typography>

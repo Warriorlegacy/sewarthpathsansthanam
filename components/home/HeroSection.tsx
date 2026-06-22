@@ -46,22 +46,7 @@ export default function HeroSection() {
     setM({ x: x * 0.35, y: y * 0.35 });
   };
 
-  // Typewriter effect for Sanskrit Motto
-  const mottoText = t("tagline");
-  const [motto, setMotto] = useState("");
-  useEffect(() => {
-    let index = 0;
-    setMotto("");
-    const interval = setInterval(() => {
-      if (index < mottoText.length) {
-        setMotto((prev) => prev + mottoText.charAt(index));
-        index++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 120);
-    return () => clearInterval(interval);
-  }, [mottoText]);
+
 
   // Particles Configuration
   const [particles, setParticles] = useState<Array<{ id: number; left: number; delay: number; size: number; drift: number }>>([]);
@@ -192,61 +177,6 @@ export default function HeroSection() {
           >
             {t("ngoNameEn")}
           </Typography>
-
-          {/* Slogan with Typewriter Effect */}
-          <Box
-            sx={{
-              display: "inline-flex",
-              flexDirection: "column",
-              borderLeft: "4px solid #C9920C",
-              pl: 3,
-              mb: 4,
-              textAlign: "left",
-            }}
-          >
-            <Typography
-              variant="h3"
-              translate="no"
-              className="notranslate"
-              sx={{
-                fontFamily: "'Noto Sans Devanagari', sans-serif",
-                fontWeight: 800,
-                color: "#C9920C",
-                fontSize: { xs: "1.6rem", sm: "2.2rem", md: "2.6rem" },
-                lineHeight: 1.2,
-                minHeight: "1.2em", // Avoid layout shift during typing
-                textShadow: "0 0 15px rgba(201, 146, 12, 0.3)",
-              }}
-            >
-              {motto}
-              <Box
-                component="span"
-                sx={{
-                  display: "inline-block",
-                  width: "2px",
-                  height: "0.8em",
-                  bgcolor: "#C9920C",
-                  ml: 0.5,
-                  animation: "blink 1s step-end infinite",
-                  "@keyframes blink": {
-                    "50%": { opacity: 0 },
-                  },
-                }}
-              />
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              sx={{
-                color: "rgba(255,255,255,0.55)",
-                mt: 0.5,
-                fontWeight: 500,
-                fontStyle: "italic",
-                letterSpacing: "0.02em",
-              }}
-            >
-              {t("taglineEn")}
-            </Typography>
-          </Box>
 
           {/* Mission Description */}
           <Typography
