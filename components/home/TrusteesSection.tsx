@@ -22,6 +22,8 @@ interface Trustee {
   nameHi: string;
   designation: string;
   designationHi: string;
+  responsibility?: string;
+  responsibilityHi?: string;
   location: string;
   initials: string;
   primary?: boolean;
@@ -34,13 +36,69 @@ interface Trustee {
 
 const trustees: Trustee[] = [
   {
-    name: "Shri Mahesh Kumar Pandey",
-    nameHi: "श्री महेश कुमार पाण्डेय",
-    designation: "Founder & Chief Trustee",
-    designationHi: "संस्थापक एवं प्रमुख न्यासी",
+    name: "Pt. Mahesh Kumar Pandey",
+    nameHi: "पं. महेश कुमार पाण्डेय",
+    designation: "President",
+    designationHi: "अध्यक्ष",
+    responsibility: "Head of Institution, Vision, Government Coordination",
+    responsibilityHi: "संस्थान प्रमुख, विजन, सरकारी समन्वय",
     location: "Varanasi, UP",
     initials: "MKP",
     primary: true,
+    image: "/images/mahesh-kumar-pandey.jpg",
+  },
+  {
+    name: "Babu Dhan Ji Tiwari",
+    nameHi: "बाबू धन जी तिवारी",
+    designation: "General Secretary",
+    designationHi: "महासचिव",
+    responsibility: "Daily Operations, Documentation, Meetings, Correspondence",
+    responsibilityHi: "दैनिक संचालन, प्रलेखन, बैठकें, पत्राचार",
+    location: "Varanasi, UP",
+    initials: "BDJT",
+    image: "/images/babu-dhan-ji.jpeg",
+  },
+  {
+    name: "Amar Nath Pandey",
+    nameHi: "अमर नाथ पाण्डेय",
+    designation: "Treasurer",
+    designationHi: "कोषाध्यक्ष",
+    responsibility: "Accounts, Banking, Donation Receipts, Audit",
+    responsibilityHi: "खाता, बैंकिंग, दान रसीदें, लेखा परीक्षा",
+    location: "Varanasi, UP",
+    initials: "ANP",
+    image: "/images/amarnath-pandey.jpeg",
+  },
+  {
+    name: "Ajay Kumar Srivastav",
+    nameHi: "अजय कुमार श्रीवास्तव",
+    designation: "Spokesperson",
+    designationHi: "प्रवक्ता",
+    responsibility: "Media, Press Notes, Stage Management, Publicity",
+    responsibilityHi: "मीडिया, प्रेस नोट्स, मंच प्रबंधन, प्रचार",
+    location: "Varanasi, UP",
+    initials: "AKS",
+    image: "/images/ajay-kumar-srivastav.jpeg",
+  },
+  {
+    name: "Smt. Komal Devi",
+    nameHi: "श्रीमती कोमल देवी",
+    designation: "Women President",
+    designationHi: "महिला अध्यक्ष",
+    responsibility: "Women’s Wing, Women Patients, Ladies Donations, Women Empowerment",
+    responsibilityHi: "महिला विंग, महिला मरीज, महिला दान, महिला सशक्तिकरण",
+    location: "Varanasi, UP",
+    initials: "KD",
+  },
+  {
+    name: "Shri Shobh Nath Rai",
+    nameHi: "श्री शोभनाथ राय",
+    designation: "Institutional Advisor",
+    designationHi: "संस्थागत सलाहकार",
+    responsibility: "Organizing, Program Planning",
+    responsibilityHi: "आयोजन, कार्यक्रम योजना",
+    location: "Varanasi, UP",
+    initials: "SNR",
   },
   {
     name: "Piyush Raj Singh",
@@ -62,38 +120,6 @@ const trustees: Trustee[] = [
       }
     ],
     image: "/images/piyush-profile.jpg",
-  },
-  {
-    name: "Smt. Madhu Pandey",
-    nameHi: "श्रीमती मधु पाण्डेय",
-    designation: "Trustee Member",
-    designationHi: "न्यासी सदस्य",
-    location: "Varanasi, UP",
-    initials: "MP",
-  },
-  {
-    name: "Smt. Komal Devi",
-    nameHi: "श्रीमती कोमल देवी",
-    designation: "Trustee Member",
-    designationHi: "न्यासी सदस्य",
-    location: "Varanasi, UP",
-    initials: "KD",
-  },
-  {
-    name: "Shri Amarnath Pandey",
-    nameHi: "श्री अमरनाथ पाण्डेय",
-    designation: "Trustee Member",
-    designationHi: "न्यासी सदस्य",
-    location: "Varanasi, UP",
-    initials: "AP",
-  },
-  {
-    name: "Km. Priti Kumari",
-    nameHi: "कु. प्रीति कुमारी",
-    designation: "Trustee Member",
-    designationHi: "न्यासी सदस्य",
-    location: "Varanasi, UP",
-    initials: "PK",
   },
 ];
 
@@ -189,6 +215,14 @@ export default function TrusteesSection() {
                       >
                         {locale === "hi" ? trustee.designationHi : trustee.designation}
                       </Typography>
+                      {trustee.responsibility && (
+                        <Typography
+                          variant="caption"
+                          sx={{ color: "rgba(255,255,255,0.7)", display: "block", mt: 0.5, fontStyle: "italic", fontSize: "0.78rem" }}
+                        >
+                          {locale === "hi" ? trustee.responsibilityHi : trustee.responsibility}
+                        </Typography>
+                      )}
                       <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.45)", display: "block", mt: 0.5 }}>
                         {trustee.location}
                       </Typography>
